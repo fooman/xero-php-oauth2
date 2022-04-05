@@ -1,6 +1,6 @@
 {
-    "name": "xeroapi/xero-php-oauth2",
-    "description": "Xero official PHP SDK for oAuth2 generated with OpenAPI spec 3",
+    "name": "fooman/xero-php-oauth2",
+    "description": "Xero PHP SDK for oAuth2 generated with OpenAPI spec 3 with PHP 8.1 support",
     "keywords": [
         "openapispec",
         "xero",
@@ -9,7 +9,7 @@
         "rest",
         "api"
     ],
-    "homepage": "https://github.com/xeroapi/xero-php-oauth2",
+    "homepage": "https://github.com/fooman/xero-php-oauth2",
     "license": "MIT",
     "authors": [
         {
@@ -18,7 +18,7 @@
         }
     ],
     "require": {
-        "php": ">=5.6",
+        "php": ">=5.6 <8.2",
         "ext-curl": "*",
         "ext-json": "*",
         "ext-mbstring": "*",
