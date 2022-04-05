@@ -1,6 +1,6 @@
 {
     "name": "fooman/xero-php-oauth2",
-    "version": "2.9.0-p3",
+    "version": "2.12.1-p1",
     "conflict": {
         "xeroapi/xero-php-oauth2": "*"
     },
