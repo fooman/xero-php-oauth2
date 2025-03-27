@@ -31,7 +31,6 @@ namespace XeroAPI\XeroPHP\Models\File;
 use \ArrayAccess;
 use \XeroAPI\XeroPHP\FileObjectSerializer;
 use \XeroAPI\XeroPHP\StringUtil;
-use ReturnTypeWillChange;
 
 /**
  * Folders Class Doc Comment
@@ -176,7 +175,7 @@ class Folders implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->container['folders'] = isset($data['folders']) ? $data['folders'] : null;
     }

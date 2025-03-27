@@ -31,7 +31,6 @@ namespace XeroAPI\XeroPHP\Models\PayrollAu;
 use \ArrayAccess;
 use \XeroAPI\XeroPHP\PayrollAuObjectSerializer;
 use \XeroAPI\XeroPHP\StringUtil;
-use ReturnTypeWillChange;
 
 /**
  * LeaveApplications Class Doc Comment
@@ -176,7 +175,7 @@ class LeaveApplications implements ModelInterface, ArrayAccess, \Countable, \Ite
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->container['leave_applications'] = isset($data['leave_applications']) ? $data['leave_applications'] : null;
     }

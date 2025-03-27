@@ -29,7 +29,6 @@
 namespace XeroAPI\XeroPHP\Models\Project;
 use \XeroAPI\XeroPHP\ProjectObjectSerializer;
 use \XeroAPI\XeroPHP\StringUtil;
-use ReturnTypeWillChange;
 
 /**
  * ProjectStatus Class Doc Comment

@@ -29,7 +29,6 @@
 namespace XeroAPI\XeroPHP\Models\File;
 use \XeroAPI\XeroPHP\FileObjectSerializer;
 use \XeroAPI\XeroPHP\StringUtil;
-use ReturnTypeWillChange;
 
 /**
  * ObjectGroup Class Doc Comment

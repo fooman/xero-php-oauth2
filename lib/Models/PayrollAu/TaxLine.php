@@ -31,7 +31,6 @@ namespace XeroAPI\XeroPHP\Models\PayrollAu;
 use \ArrayAccess;
 use \XeroAPI\XeroPHP\PayrollAuObjectSerializer;
 use \XeroAPI\XeroPHP\StringUtil;
-use ReturnTypeWillChange;
 
 /**
  * TaxLine Class Doc Comment
@@ -201,7 +200,7 @@ class TaxLine implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->container['payslip_tax_line_id'] = isset($data['payslip_tax_line_id']) ? $data['payslip_tax_line_id'] : null;
         $this->container['amount'] = isset($data['amount']) ? $data['amount'] : null;

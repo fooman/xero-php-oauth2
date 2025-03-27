@@ -31,7 +31,6 @@ namespace XeroAPI\XeroPHP\Models\Accounting;
 use \ArrayAccess;
 use \XeroAPI\XeroPHP\AccountingObjectSerializer;
 use \XeroAPI\XeroPHP\StringUtil;
-use ReturnTypeWillChange;
 
 /**
  * TrackingOption Class Doc Comment
@@ -208,7 +207,7 @@ class TrackingOption implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->container['tracking_option_id'] = isset($data['tracking_option_id']) ? $data['tracking_option_id'] : null;
         $this->container['name'] = isset($data['name']) ? $data['name'] : null;

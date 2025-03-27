@@ -31,7 +31,6 @@ namespace XeroAPI\XeroPHP\Models\Asset;
 use \ArrayAccess;
 use \XeroAPI\XeroPHP\AssetObjectSerializer;
 use \XeroAPI\XeroPHP\StringUtil;
-use ReturnTypeWillChange;
 
 /**
  * FieldValidationErrorsElement Class Doc Comment
@@ -201,7 +200,7 @@ class FieldValidationErrorsElement implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->container['field_name'] = isset($data['field_name']) ? $data['field_name'] : null;
         $this->container['value_provided'] = isset($data['value_provided']) ? $data['value_provided'] : null;

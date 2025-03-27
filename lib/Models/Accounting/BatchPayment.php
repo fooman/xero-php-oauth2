@@ -31,7 +31,6 @@ namespace XeroAPI\XeroPHP\Models\Accounting;
 use \ArrayAccess;
 use \XeroAPI\XeroPHP\AccountingObjectSerializer;
 use \XeroAPI\XeroPHP\StringUtil;
-use ReturnTypeWillChange;
 
 /**
  * BatchPayment Class Doc Comment
@@ -286,7 +285,7 @@ class BatchPayment implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->container['account'] = isset($data['account']) ? $data['account'] : null;
         $this->container['reference'] = isset($data['reference']) ? $data['reference'] : null;

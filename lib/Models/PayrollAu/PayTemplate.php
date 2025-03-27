@@ -31,7 +31,6 @@ namespace XeroAPI\XeroPHP\Models\PayrollAu;
 use \ArrayAccess;
 use \XeroAPI\XeroPHP\PayrollAuObjectSerializer;
 use \XeroAPI\XeroPHP\StringUtil;
-use ReturnTypeWillChange;
 
 /**
  * PayTemplate Class Doc Comment
@@ -196,7 +195,7 @@ class PayTemplate implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->container['earnings_lines'] = isset($data['earnings_lines']) ? $data['earnings_lines'] : null;
         $this->container['deduction_lines'] = isset($data['deduction_lines']) ? $data['deduction_lines'] : null;

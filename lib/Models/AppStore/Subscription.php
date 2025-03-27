@@ -31,7 +31,6 @@ namespace XeroAPI\XeroPHP\Models\AppStore;
 use \ArrayAccess;
 use \XeroAPI\XeroPHP\AppStoreObjectSerializer;
 use \XeroAPI\XeroPHP\StringUtil;
-use ReturnTypeWillChange;
 
 /**
  * Subscription Class Doc Comment
@@ -228,7 +227,7 @@ class Subscription implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->container['current_period_end'] = isset($data['current_period_end']) ? $data['current_period_end'] : null;
         $this->container['end_date'] = isset($data['end_date']) ? $data['end_date'] : null;

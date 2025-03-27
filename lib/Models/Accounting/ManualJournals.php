@@ -31,7 +31,6 @@ namespace XeroAPI\XeroPHP\Models\Accounting;
 use \ArrayAccess;
 use \XeroAPI\XeroPHP\AccountingObjectSerializer;
 use \XeroAPI\XeroPHP\StringUtil;
-use ReturnTypeWillChange;
 
 /**
  * ManualJournals Class Doc Comment
@@ -186,7 +185,7 @@ class ManualJournals implements ModelInterface, ArrayAccess, \Countable, \Iterat
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->container['pagination'] = isset($data['pagination']) ? $data['pagination'] : null;
         $this->container['warnings'] = isset($data['warnings']) ? $data['warnings'] : null;

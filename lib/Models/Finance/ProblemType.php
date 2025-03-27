@@ -29,7 +29,6 @@
 namespace XeroAPI\XeroPHP\Models\Finance;
 use \XeroAPI\XeroPHP\FinanceObjectSerializer;
 use \XeroAPI\XeroPHP\StringUtil;
-use ReturnTypeWillChange;
 
 /**
  * ProblemType Class Doc Comment

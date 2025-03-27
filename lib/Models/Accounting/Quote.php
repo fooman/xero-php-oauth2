@@ -31,7 +31,6 @@ namespace XeroAPI\XeroPHP\Models\Accounting;
 use \ArrayAccess;
 use \XeroAPI\XeroPHP\AccountingObjectSerializer;
 use \XeroAPI\XeroPHP\StringUtil;
-use ReturnTypeWillChange;
 
 /**
  * Quote Class Doc Comment
@@ -291,7 +290,7 @@ class Quote implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->container['quote_id'] = isset($data['quote_id']) ? $data['quote_id'] : null;
         $this->container['quote_number'] = isset($data['quote_number']) ? $data['quote_number'] : null;

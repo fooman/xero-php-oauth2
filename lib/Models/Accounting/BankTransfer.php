@@ -31,7 +31,6 @@ namespace XeroAPI\XeroPHP\Models\Accounting;
 use \ArrayAccess;
 use \XeroAPI\XeroPHP\AccountingObjectSerializer;
 use \XeroAPI\XeroPHP\StringUtil;
-use ReturnTypeWillChange;
 
 /**
  * BankTransfer Class Doc Comment
@@ -241,7 +240,7 @@ class BankTransfer implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->container['from_bank_account'] = isset($data['from_bank_account']) ? $data['from_bank_account'] : null;
         $this->container['to_bank_account'] = isset($data['to_bank_account']) ? $data['to_bank_account'] : null;

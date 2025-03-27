@@ -31,7 +31,6 @@ namespace XeroAPI\XeroPHP\Models\Finance;
 use \ArrayAccess;
 use \XeroAPI\XeroPHP\FinanceObjectSerializer;
 use \XeroAPI\XeroPHP\StringUtil;
-use ReturnTypeWillChange;
 
 /**
  * BalanceSheetResponse Class Doc Comment
@@ -191,7 +190,7 @@ class BalanceSheetResponse implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->container['balance_date'] = isset($data['balance_date']) ? $data['balance_date'] : null;
         $this->container['asset'] = isset($data['asset']) ? $data['asset'] : null;

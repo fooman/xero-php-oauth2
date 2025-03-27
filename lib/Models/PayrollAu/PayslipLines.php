@@ -31,7 +31,6 @@ namespace XeroAPI\XeroPHP\Models\PayrollAu;
 use \ArrayAccess;
 use \XeroAPI\XeroPHP\PayrollAuObjectSerializer;
 use \XeroAPI\XeroPHP\StringUtil;
-use ReturnTypeWillChange;
 
 /**
  * PayslipLines Class Doc Comment
@@ -211,7 +210,7 @@ class PayslipLines implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->container['earnings_lines'] = isset($data['earnings_lines']) ? $data['earnings_lines'] : null;
         $this->container['leave_earnings_lines'] = isset($data['leave_earnings_lines']) ? $data['leave_earnings_lines'] : null;

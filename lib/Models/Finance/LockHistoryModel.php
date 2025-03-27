@@ -31,7 +31,6 @@ namespace XeroAPI\XeroPHP\Models\Finance;
 use \ArrayAccess;
 use \XeroAPI\XeroPHP\FinanceObjectSerializer;
 use \XeroAPI\XeroPHP\StringUtil;
-use ReturnTypeWillChange;
 
 /**
  * LockHistoryModel Class Doc Comment
@@ -186,7 +185,7 @@ class LockHistoryModel implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->container['hard_lock_date'] = isset($data['hard_lock_date']) ? $data['hard_lock_date'] : null;
         $this->container['soft_lock_date'] = isset($data['soft_lock_date']) ? $data['soft_lock_date'] : null;

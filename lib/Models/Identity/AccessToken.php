@@ -31,7 +31,6 @@ namespace XeroAPI\XeroPHP\Models\Identity;
 use \ArrayAccess;
 use \XeroAPI\XeroPHP\IdentityObjectSerializer;
 use \XeroAPI\XeroPHP\StringUtil;
-use ReturnTypeWillChange;
 
 /**
  * AccessToken Class Doc Comment
@@ -196,7 +195,7 @@ class AccessToken implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->container['id_token'] = isset($data['id_token']) ? $data['id_token'] : null;
         $this->container['access_token'] = isset($data['access_token']) ? $data['access_token'] : null;

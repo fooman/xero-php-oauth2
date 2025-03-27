@@ -29,7 +29,6 @@
 namespace XeroAPI\XeroPHP\Models\PayrollAu;
 use \XeroAPI\XeroPHP\PayrollAuObjectSerializer;
 use \XeroAPI\XeroPHP\StringUtil;
-use ReturnTypeWillChange;
 
 /**
  * PaymentFrequencyType Class Doc Comment

@@ -31,7 +31,6 @@ namespace XeroAPI\XeroPHP\Models\Accounting;
 use \ArrayAccess;
 use \XeroAPI\XeroPHP\AccountingObjectSerializer;
 use \XeroAPI\XeroPHP\StringUtil;
-use ReturnTypeWillChange;
 
 /**
  * ManualJournalLine Class Doc Comment
@@ -211,7 +210,7 @@ class ManualJournalLine implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->container['line_amount'] = isset($data['line_amount']) ? $data['line_amount'] : null;
         $this->container['account_code'] = isset($data['account_code']) ? $data['account_code'] : null;

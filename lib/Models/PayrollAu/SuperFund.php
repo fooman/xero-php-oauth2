@@ -31,7 +31,6 @@ namespace XeroAPI\XeroPHP\Models\PayrollAu;
 use \ArrayAccess;
 use \XeroAPI\XeroPHP\PayrollAuObjectSerializer;
 use \XeroAPI\XeroPHP\StringUtil;
-use ReturnTypeWillChange;
 
 /**
  * SuperFund Class Doc Comment
@@ -236,7 +235,7 @@ class SuperFund implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->container['super_fund_id'] = isset($data['super_fund_id']) ? $data['super_fund_id'] : null;
         $this->container['type'] = isset($data['type']) ? $data['type'] : null;

@@ -31,7 +31,6 @@ namespace XeroAPI\XeroPHP\Models\PayrollAu;
 use \ArrayAccess;
 use \XeroAPI\XeroPHP\PayrollAuObjectSerializer;
 use \XeroAPI\XeroPHP\StringUtil;
-use ReturnTypeWillChange;
 
 /**
  * SettingsTrackingCategoriesTimesheetCategories Class Doc Comment
@@ -182,7 +181,7 @@ class SettingsTrackingCategoriesTimesheetCategories implements ModelInterface, A
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->container['tracking_category_id'] = isset($data['tracking_category_id']) ? $data['tracking_category_id'] : null;
         $this->container['tracking_category_name'] = isset($data['tracking_category_name']) ? $data['tracking_category_name'] : null;

@@ -31,7 +31,6 @@ namespace XeroAPI\XeroPHP\Models\PayrollUk;
 use \ArrayAccess;
 use \XeroAPI\XeroPHP\PayrollUkObjectSerializer;
 use \XeroAPI\XeroPHP\StringUtil;
-use ReturnTypeWillChange;
 
 /**
  * Employees Class Doc Comment
@@ -186,7 +185,7 @@ class Employees implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->container['pagination'] = isset($data['pagination']) ? $data['pagination'] : null;
         $this->container['problem'] = isset($data['problem']) ? $data['problem'] : null;

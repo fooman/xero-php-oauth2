@@ -31,7 +31,6 @@ namespace XeroAPI\XeroPHP\Models\PayrollUk;
 use \ArrayAccess;
 use \XeroAPI\XeroPHP\PayrollUkObjectSerializer;
 use \XeroAPI\XeroPHP\StringUtil;
-use ReturnTypeWillChange;
 
 /**
  * EmployeeOpeningBalances Class Doc Comment
@@ -201,7 +200,7 @@ class EmployeeOpeningBalances implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->container['statutory_adoption_pay'] = isset($data['statutory_adoption_pay']) ? $data['statutory_adoption_pay'] : null;
         $this->container['statutory_maternity_pay'] = isset($data['statutory_maternity_pay']) ? $data['statutory_maternity_pay'] : null;

@@ -31,7 +31,6 @@ namespace XeroAPI\XeroPHP\Models\Accounting;
 use \ArrayAccess;
 use \XeroAPI\XeroPHP\AccountingObjectSerializer;
 use \XeroAPI\XeroPHP\StringUtil;
-use ReturnTypeWillChange;
 
 /**
  * InvoiceAddress Class Doc Comment
@@ -231,7 +230,7 @@ class InvoiceAddress implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->container['invoice_address_type'] = isset($data['invoice_address_type']) ? $data['invoice_address_type'] : null;
         $this->container['address_line1'] = isset($data['address_line1']) ? $data['address_line1'] : null;

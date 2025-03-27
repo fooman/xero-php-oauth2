@@ -31,7 +31,6 @@ namespace XeroAPI\XeroPHP\Models\File;
 use \ArrayAccess;
 use \XeroAPI\XeroPHP\FileObjectSerializer;
 use \XeroAPI\XeroPHP\StringUtil;
-use ReturnTypeWillChange;
 
 /**
  * Association Class Doc Comment
@@ -206,7 +205,7 @@ class Association implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->container['send_with_object'] = isset($data['send_with_object']) ? $data['send_with_object'] : null;
         $this->container['name'] = isset($data['name']) ? $data['name'] : null;

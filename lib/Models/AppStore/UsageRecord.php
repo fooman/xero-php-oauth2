@@ -31,7 +31,6 @@ namespace XeroAPI\XeroPHP\Models\AppStore;
 use \ArrayAccess;
 use \XeroAPI\XeroPHP\AppStoreObjectSerializer;
 use \XeroAPI\XeroPHP\StringUtil;
-use ReturnTypeWillChange;
 
 /**
  * UsageRecord Class Doc Comment
@@ -211,7 +210,7 @@ class UsageRecord implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->container['quantity'] = isset($data['quantity']) ? $data['quantity'] : null;
         $this->container['subscription_id'] = isset($data['subscription_id']) ? $data['subscription_id'] : null;

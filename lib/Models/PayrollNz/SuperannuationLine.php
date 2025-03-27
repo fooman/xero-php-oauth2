@@ -31,7 +31,6 @@ namespace XeroAPI\XeroPHP\Models\PayrollNz;
 use \ArrayAccess;
 use \XeroAPI\XeroPHP\PayrollNzObjectSerializer;
 use \XeroAPI\XeroPHP\StringUtil;
-use ReturnTypeWillChange;
 
 /**
  * SuperannuationLine Class Doc Comment
@@ -201,7 +200,7 @@ class SuperannuationLine implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->container['superannuation_type_id'] = isset($data['superannuation_type_id']) ? $data['superannuation_type_id'] : null;
         $this->container['display_name'] = isset($data['display_name']) ? $data['display_name'] : null;

@@ -31,7 +31,6 @@ namespace XeroAPI\XeroPHP\Models\PayrollAu;
 use \ArrayAccess;
 use \XeroAPI\XeroPHP\PayrollAuObjectSerializer;
 use \XeroAPI\XeroPHP\StringUtil;
-use ReturnTypeWillChange;
 
 /**
  * LeaveLine Class Doc Comment
@@ -211,7 +210,7 @@ class LeaveLine implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->container['leave_type_id'] = isset($data['leave_type_id']) ? $data['leave_type_id'] : null;
         $this->container['calculation_type'] = isset($data['calculation_type']) ? $data['calculation_type'] : null;

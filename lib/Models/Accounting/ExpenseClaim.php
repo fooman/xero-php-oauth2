@@ -31,7 +31,6 @@ namespace XeroAPI\XeroPHP\Models\Accounting;
 use \ArrayAccess;
 use \XeroAPI\XeroPHP\AccountingObjectSerializer;
 use \XeroAPI\XeroPHP\StringUtil;
-use ReturnTypeWillChange;
 
 /**
  * ExpenseClaim Class Doc Comment
@@ -252,7 +251,7 @@ class ExpenseClaim implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->container['expense_claim_id'] = isset($data['expense_claim_id']) ? $data['expense_claim_id'] : null;
         $this->container['status'] = isset($data['status']) ? $data['status'] : null;

@@ -31,7 +31,6 @@ namespace XeroAPI\XeroPHP\Models\PayrollAu;
 use \ArrayAccess;
 use \XeroAPI\XeroPHP\PayrollAuObjectSerializer;
 use \XeroAPI\XeroPHP\StringUtil;
-use ReturnTypeWillChange;
 
 /**
  * SuperMembership Class Doc Comment
@@ -186,7 +185,7 @@ class SuperMembership implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->container['super_membership_id'] = isset($data['super_membership_id']) ? $data['super_membership_id'] : null;
         $this->container['super_fund_id'] = isset($data['super_fund_id']) ? $data['super_fund_id'] : null;

@@ -31,7 +31,6 @@ namespace XeroAPI\XeroPHP\Models\PayrollUk;
 use \ArrayAccess;
 use \XeroAPI\XeroPHP\PayrollUkObjectSerializer;
 use \XeroAPI\XeroPHP\StringUtil;
-use ReturnTypeWillChange;
 
 /**
  * EmployeeStatutoryLeaveBalance Class Doc Comment
@@ -220,7 +219,7 @@ class EmployeeStatutoryLeaveBalance implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->container['leave_type'] = isset($data['leave_type']) ? $data['leave_type'] : null;
         $this->container['balance_remaining'] = isset($data['balance_remaining']) ? $data['balance_remaining'] : null;

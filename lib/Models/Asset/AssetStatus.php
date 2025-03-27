@@ -29,7 +29,6 @@
 namespace XeroAPI\XeroPHP\Models\Asset;
 use \XeroAPI\XeroPHP\AssetObjectSerializer;
 use \XeroAPI\XeroPHP\StringUtil;
-use ReturnTypeWillChange;
 
 /**
  * AssetStatus Class Doc Comment

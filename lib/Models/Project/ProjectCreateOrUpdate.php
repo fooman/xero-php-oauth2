@@ -31,7 +31,6 @@ namespace XeroAPI\XeroPHP\Models\Project;
 use \ArrayAccess;
 use \XeroAPI\XeroPHP\ProjectObjectSerializer;
 use \XeroAPI\XeroPHP\StringUtil;
-use ReturnTypeWillChange;
 
 /**
  * ProjectCreateOrUpdate Class Doc Comment
@@ -191,7 +190,7 @@ class ProjectCreateOrUpdate implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->container['contact_id'] = isset($data['contact_id']) ? $data['contact_id'] : null;
         $this->container['name'] = isset($data['name']) ? $data['name'] : null;

@@ -31,7 +31,6 @@ namespace XeroAPI\XeroPHP\Models\Finance;
 use \ArrayAccess;
 use \XeroAPI\XeroPHP\FinanceObjectSerializer;
 use \XeroAPI\XeroPHP\StringUtil;
-use ReturnTypeWillChange;
 
 /**
  * PnlAccountClass Class Doc Comment
@@ -181,7 +180,7 @@ class PnlAccountClass implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->container['total'] = isset($data['total']) ? $data['total'] : null;
         $this->container['account_types'] = isset($data['account_types']) ? $data['account_types'] : null;

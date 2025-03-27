@@ -31,7 +31,6 @@ namespace XeroAPI\XeroPHP\Models\Accounting;
 use \ArrayAccess;
 use \XeroAPI\XeroPHP\AccountingObjectSerializer;
 use \XeroAPI\XeroPHP\StringUtil;
-use ReturnTypeWillChange;
 
 /**
  * Setup Class Doc Comment
@@ -186,7 +185,7 @@ class Setup implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->container['conversion_date'] = isset($data['conversion_date']) ? $data['conversion_date'] : null;
         $this->container['conversion_balances'] = isset($data['conversion_balances']) ? $data['conversion_balances'] : null;

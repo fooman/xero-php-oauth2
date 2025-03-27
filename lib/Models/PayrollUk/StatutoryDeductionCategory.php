@@ -29,7 +29,6 @@
 namespace XeroAPI\XeroPHP\Models\PayrollUk;
 use \XeroAPI\XeroPHP\PayrollUkObjectSerializer;
 use \XeroAPI\XeroPHP\StringUtil;
-use ReturnTypeWillChange;
 
 /**
  * StatutoryDeductionCategory Class Doc Comment

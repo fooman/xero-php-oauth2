@@ -31,7 +31,6 @@ namespace XeroAPI\XeroPHP\Models\Asset;
 use \ArrayAccess;
 use \XeroAPI\XeroPHP\AssetObjectSerializer;
 use \XeroAPI\XeroPHP\StringUtil;
-use ReturnTypeWillChange;
 
 /**
  * Pagination Class Doc Comment
@@ -191,7 +190,7 @@ class Pagination implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->container['page'] = isset($data['page']) ? $data['page'] : null;
         $this->container['page_size'] = isset($data['page_size']) ? $data['page_size'] : null;

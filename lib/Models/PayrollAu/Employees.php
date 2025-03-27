@@ -31,7 +31,6 @@ namespace XeroAPI\XeroPHP\Models\PayrollAu;
 use \ArrayAccess;
 use \XeroAPI\XeroPHP\PayrollAuObjectSerializer;
 use \XeroAPI\XeroPHP\StringUtil;
-use ReturnTypeWillChange;
 
 /**
  * Employees Class Doc Comment
@@ -176,7 +175,7 @@ class Employees implements ModelInterface, ArrayAccess, \Countable, \IteratorAgg
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->container['employees'] = isset($data['employees']) ? $data['employees'] : null;
     }

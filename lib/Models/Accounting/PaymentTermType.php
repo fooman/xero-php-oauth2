@@ -29,7 +29,6 @@
 namespace XeroAPI\XeroPHP\Models\Accounting;
 use \XeroAPI\XeroPHP\AccountingObjectSerializer;
 use \XeroAPI\XeroPHP\StringUtil;
-use ReturnTypeWillChange;
 
 /**
  * PaymentTermType Class Doc Comment

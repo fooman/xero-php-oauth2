@@ -31,7 +31,6 @@ namespace XeroAPI\XeroPHP\Models\PayrollUk;
 use \ArrayAccess;
 use \XeroAPI\XeroPHP\PayrollUkObjectSerializer;
 use \XeroAPI\XeroPHP\StringUtil;
-use ReturnTypeWillChange;
 
 /**
  * Payslip Class Doc Comment
@@ -328,7 +327,7 @@ class Payslip implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->container['pay_slip_id'] = isset($data['pay_slip_id']) ? $data['pay_slip_id'] : null;
         $this->container['employee_id'] = isset($data['employee_id']) ? $data['employee_id'] : null;

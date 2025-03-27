@@ -31,7 +31,6 @@ namespace XeroAPI\XeroPHP\Models\Accounting;
 use \ArrayAccess;
 use \XeroAPI\XeroPHP\AccountingObjectSerializer;
 use \XeroAPI\XeroPHP\StringUtil;
-use ReturnTypeWillChange;
 
 /**
  * ConversionBalances Class Doc Comment
@@ -187,7 +186,7 @@ class ConversionBalances implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->container['account_code'] = isset($data['account_code']) ? $data['account_code'] : null;
         $this->container['balance'] = isset($data['balance']) ? $data['balance'] : null;

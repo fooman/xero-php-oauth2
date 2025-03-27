@@ -31,7 +31,6 @@ namespace XeroAPI\XeroPHP\Models\Accounting;
 use \ArrayAccess;
 use \XeroAPI\XeroPHP\AccountingObjectSerializer;
 use \XeroAPI\XeroPHP\StringUtil;
-use ReturnTypeWillChange;
 
 /**
  * HistoryRecord Class Doc Comment
@@ -191,7 +190,7 @@ class HistoryRecord implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->container['details'] = isset($data['details']) ? $data['details'] : null;
         $this->container['changes'] = isset($data['changes']) ? $data['changes'] : null;

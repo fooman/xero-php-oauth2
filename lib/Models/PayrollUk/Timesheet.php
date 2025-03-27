@@ -31,7 +31,6 @@ namespace XeroAPI\XeroPHP\Models\PayrollUk;
 use \ArrayAccess;
 use \XeroAPI\XeroPHP\PayrollUkObjectSerializer;
 use \XeroAPI\XeroPHP\StringUtil;
-use ReturnTypeWillChange;
 
 /**
  * Timesheet Class Doc Comment
@@ -233,7 +232,7 @@ class Timesheet implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->container['timesheet_id'] = isset($data['timesheet_id']) ? $data['timesheet_id'] : null;
         $this->container['payroll_calendar_id'] = isset($data['payroll_calendar_id']) ? $data['payroll_calendar_id'] : null;

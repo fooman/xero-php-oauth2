@@ -31,7 +31,6 @@ namespace XeroAPI\XeroPHP\Models\Accounting;
 use \ArrayAccess;
 use \XeroAPI\XeroPHP\AccountingObjectSerializer;
 use \XeroAPI\XeroPHP\StringUtil;
-use ReturnTypeWillChange;
 
 /**
  * LinkedTransaction Class Doc Comment
@@ -275,7 +274,7 @@ class LinkedTransaction implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->container['source_transaction_id'] = isset($data['source_transaction_id']) ? $data['source_transaction_id'] : null;
         $this->container['source_line_item_id'] = isset($data['source_line_item_id']) ? $data['source_line_item_id'] : null;

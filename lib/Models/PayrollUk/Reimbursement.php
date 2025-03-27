@@ -31,7 +31,6 @@ namespace XeroAPI\XeroPHP\Models\PayrollUk;
 use \ArrayAccess;
 use \XeroAPI\XeroPHP\PayrollUkObjectSerializer;
 use \XeroAPI\XeroPHP\StringUtil;
-use ReturnTypeWillChange;
 
 /**
  * Reimbursement Class Doc Comment
@@ -191,7 +190,7 @@ class Reimbursement implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->container['reimbursement_id'] = isset($data['reimbursement_id']) ? $data['reimbursement_id'] : null;
         $this->container['name'] = isset($data['name']) ? $data['name'] : null;

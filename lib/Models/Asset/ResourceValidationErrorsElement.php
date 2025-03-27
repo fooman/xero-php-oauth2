@@ -31,7 +31,6 @@ namespace XeroAPI\XeroPHP\Models\Asset;
 use \ArrayAccess;
 use \XeroAPI\XeroPHP\AssetObjectSerializer;
 use \XeroAPI\XeroPHP\StringUtil;
-use ReturnTypeWillChange;
 
 /**
  * ResourceValidationErrorsElement Class Doc Comment
@@ -196,7 +195,7 @@ class ResourceValidationErrorsElement implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->container['resource_name'] = isset($data['resource_name']) ? $data['resource_name'] : null;
         $this->container['localised_message'] = isset($data['localised_message']) ? $data['localised_message'] : null;

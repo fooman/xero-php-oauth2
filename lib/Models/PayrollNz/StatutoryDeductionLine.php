@@ -31,7 +31,6 @@ namespace XeroAPI\XeroPHP\Models\PayrollNz;
 use \ArrayAccess;
 use \XeroAPI\XeroPHP\PayrollNzObjectSerializer;
 use \XeroAPI\XeroPHP\StringUtil;
-use ReturnTypeWillChange;
 
 /**
  * StatutoryDeductionLine Class Doc Comment
@@ -191,7 +190,7 @@ class StatutoryDeductionLine implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->container['statutory_deduction_type_id'] = isset($data['statutory_deduction_type_id']) ? $data['statutory_deduction_type_id'] : null;
         $this->container['amount'] = isset($data['amount']) ? $data['amount'] : null;

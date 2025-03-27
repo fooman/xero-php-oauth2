@@ -31,7 +31,6 @@ namespace XeroAPI\XeroPHP\Models\PayrollNz;
 use \ArrayAccess;
 use \XeroAPI\XeroPHP\PayrollNzObjectSerializer;
 use \XeroAPI\XeroPHP\StringUtil;
-use ReturnTypeWillChange;
 
 /**
  * EmployeeTax Class Doc Comment
@@ -272,7 +271,7 @@ class EmployeeTax implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->container['ird_number'] = isset($data['ird_number']) ? $data['ird_number'] : null;
         $this->container['tax_code'] = isset($data['tax_code']) ? $data['tax_code'] : null;

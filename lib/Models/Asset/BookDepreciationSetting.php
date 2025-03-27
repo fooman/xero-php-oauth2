@@ -31,7 +31,6 @@ namespace XeroAPI\XeroPHP\Models\Asset;
 use \ArrayAccess;
 use \XeroAPI\XeroPHP\AssetObjectSerializer;
 use \XeroAPI\XeroPHP\StringUtil;
-use ReturnTypeWillChange;
 
 /**
  * BookDepreciationSetting Class Doc Comment
@@ -266,7 +265,7 @@ class BookDepreciationSetting implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->container['depreciation_method'] = isset($data['depreciation_method']) ? $data['depreciation_method'] : null;
         $this->container['averaging_method'] = isset($data['averaging_method']) ? $data['averaging_method'] : null;

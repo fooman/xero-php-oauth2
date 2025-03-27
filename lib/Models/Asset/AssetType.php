@@ -31,7 +31,6 @@ namespace XeroAPI\XeroPHP\Models\Asset;
 use \ArrayAccess;
 use \XeroAPI\XeroPHP\AssetObjectSerializer;
 use \XeroAPI\XeroPHP\StringUtil;
-use ReturnTypeWillChange;
 
 /**
  * AssetType Class Doc Comment
@@ -206,7 +205,7 @@ class AssetType implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->container['asset_type_id'] = isset($data['asset_type_id']) ? $data['asset_type_id'] : null;
         $this->container['asset_type_name'] = isset($data['asset_type_name']) ? $data['asset_type_name'] : null;

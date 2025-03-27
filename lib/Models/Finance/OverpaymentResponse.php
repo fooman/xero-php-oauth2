@@ -31,7 +31,6 @@ namespace XeroAPI\XeroPHP\Models\Finance;
 use \ArrayAccess;
 use \XeroAPI\XeroPHP\FinanceObjectSerializer;
 use \XeroAPI\XeroPHP\StringUtil;
-use ReturnTypeWillChange;
 
 /**
  * OverpaymentResponse Class Doc Comment
@@ -191,7 +190,7 @@ class OverpaymentResponse implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->container['overpayment_id'] = isset($data['overpayment_id']) ? $data['overpayment_id'] : null;
         $this->container['contact'] = isset($data['contact']) ? $data['contact'] : null;

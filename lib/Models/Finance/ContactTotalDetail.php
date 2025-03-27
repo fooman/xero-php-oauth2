@@ -31,7 +31,6 @@ namespace XeroAPI\XeroPHP\Models\Finance;
 use \ArrayAccess;
 use \XeroAPI\XeroPHP\FinanceObjectSerializer;
 use \XeroAPI\XeroPHP\StringUtil;
-use ReturnTypeWillChange;
 
 /**
  * ContactTotalDetail Class Doc Comment
@@ -186,7 +185,7 @@ class ContactTotalDetail implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->container['total_paid'] = isset($data['total_paid']) ? $data['total_paid'] : null;
         $this->container['total_outstanding'] = isset($data['total_outstanding']) ? $data['total_outstanding'] : null;

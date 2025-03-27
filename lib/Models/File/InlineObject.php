@@ -31,7 +31,6 @@ namespace XeroAPI\XeroPHP\Models\File;
 use \ArrayAccess;
 use \XeroAPI\XeroPHP\FileObjectSerializer;
 use \XeroAPI\XeroPHP\StringUtil;
-use ReturnTypeWillChange;
 
 /**
  * InlineObject Class Doc Comment
@@ -191,7 +190,7 @@ class InlineObject implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->container['body'] = isset($data['body']) ? $data['body'] : null;
         $this->container['name'] = isset($data['name']) ? $data['name'] : null;

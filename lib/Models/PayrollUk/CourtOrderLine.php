@@ -31,7 +31,6 @@ namespace XeroAPI\XeroPHP\Models\PayrollUk;
 use \ArrayAccess;
 use \XeroAPI\XeroPHP\PayrollUkObjectSerializer;
 use \XeroAPI\XeroPHP\StringUtil;
-use ReturnTypeWillChange;
 
 /**
  * CourtOrderLine Class Doc Comment
@@ -181,7 +180,7 @@ class CourtOrderLine implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->container['court_order_type_id'] = isset($data['court_order_type_id']) ? $data['court_order_type_id'] : null;
         $this->container['amount'] = isset($data['amount']) ? $data['amount'] : null;

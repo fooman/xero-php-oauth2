@@ -31,7 +31,6 @@ namespace XeroAPI\XeroPHP\Models\PayrollAu;
 use \ArrayAccess;
 use \XeroAPI\XeroPHP\PayrollAuObjectSerializer;
 use \XeroAPI\XeroPHP\StringUtil;
-use ReturnTypeWillChange;
 
 /**
  * TaxDeclaration Class Doc Comment
@@ -276,7 +275,7 @@ class TaxDeclaration implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->container['employee_id'] = isset($data['employee_id']) ? $data['employee_id'] : null;
         $this->container['employment_basis'] = isset($data['employment_basis']) ? $data['employment_basis'] : null;

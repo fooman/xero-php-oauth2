@@ -31,7 +31,6 @@ namespace XeroAPI\XeroPHP\Models\Finance;
 use \ArrayAccess;
 use \XeroAPI\XeroPHP\FinanceObjectSerializer;
 use \XeroAPI\XeroPHP\StringUtil;
-use ReturnTypeWillChange;
 
 /**
  * TrialBalanceEntry Class Doc Comment
@@ -181,7 +180,7 @@ class TrialBalanceEntry implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->container['value'] = isset($data['value']) ? $data['value'] : null;
         $this->container['entry_type'] = isset($data['entry_type']) ? $data['entry_type'] : null;

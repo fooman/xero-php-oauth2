@@ -31,7 +31,6 @@ namespace XeroAPI\XeroPHP\Models\AppStore;
 use \ArrayAccess;
 use \XeroAPI\XeroPHP\AppStoreObjectSerializer;
 use \XeroAPI\XeroPHP\StringUtil;
-use ReturnTypeWillChange;
 
 /**
  * UpdateUsageRecord Class Doc Comment
@@ -177,7 +176,7 @@ class UpdateUsageRecord implements ModelInterface, ArrayAccess
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->container['quantity'] = isset($data['quantity']) ? $data['quantity'] : null;
     }
