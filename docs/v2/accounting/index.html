@@ -2104,6 +2104,11 @@ ul.nav-tabs {
       "type" : "string",
       "description" : "Tax number of contact – this is also known as the ABN (Australia), GST Number (New Zealand), VAT Number (UK) or Tax ID Number (US and global) in the Xero UI depending on which regionalized version of Xero you are using (max length = 50)"
     },
+    "TaxNumberType" : {
+      "type" : "string",
+      "description" : "Identifier of the regional type of tax number, such as US, UK, or other regional tax identifiers",
+      "enum" : [ "SSN", "EIN", "ITIN", "ATIN" ]
+    },
     "AccountsReceivableTaxType" : {
       "type" : "string",
       "description" : "The tax type from TaxRates"
@@ -4107,7 +4112,7 @@ ul.nav-tabs {
     "OrganisationType" : {
       "type" : "string",
       "description" : "Organisation Type",
-      "enum" : [ "ACCOUNTING_PRACTICE", "COMPANY", "CHARITY", "CLUB_OR_SOCIETY", "INDIVIDUAL", "LOOK_THROUGH_COMPANY", "NOT_FOR_PROFIT", "PARTNERSHIP", "S_CORPORATION", "SELF_MANAGED_SUPERANNUATION_FUND", "SOLE_TRADER", "SUPERANNUATION_FUND", "TRUST" ]
+      "enum" : [ "ACCOUNTING_PRACTICE", "COMPANY", "CHARITY", "CLUB_OR_SOCIETY", "INDIVIDUAL", "LOOK_THROUGH_COMPANY", "NOT_FOR_PROFIT", "PARTNERSHIP", "S_CORPORATION", "SELF_MANAGED_SUPERANNUATION_FUND", "SOLE_TRADER", "SUPERANNUATION_FUND", "TRUST", "PERSONAL", "SINGLEMEMBERLLC", "CCORPORATIONLLC", "PARTNERSHIPLLC", "SCORPORATIONLLC", "LLC", "NOTLLC", "UNSPECIFIED" ]
     },
     "BaseCurrency" : {
       "$ref" : "#/components/schemas/CurrencyCode"
@@ -4184,7 +4189,7 @@ ul.nav-tabs {
     "OrganisationEntityType" : {
       "type" : "string",
       "description" : "Organisation Entity Type",
-      "enum" : [ "ACCOUNTING_PRACTICE", "COMPANY", "CHARITY", "CLUB_OR_SOCIETY", "INDIVIDUAL", "LOOK_THROUGH_COMPANY", "NOT_FOR_PROFIT", "PARTNERSHIP", "S_CORPORATION", "SELF_MANAGED_SUPERANNUATION_FUND", "SOLE_TRADER", "SUPERANNUATION_FUND", "TRUST" ]
+      "enum" : [ "ACCOUNTING_PRACTICE", "COMPANY", "CHARITY", "CLUB_OR_SOCIETY", "INDIVIDUAL", "LOOK_THROUGH_COMPANY", "NOT_FOR_PROFIT", "PARTNERSHIP", "S_CORPORATION", "SELF_MANAGED_SUPERANNUATION_FUND", "SOLE_TRADER", "SUPERANNUATION_FUND", "TRUST", "PERSONAL", "SINGLEMEMBERLLC", "CCORPORATIONLLC", "PARTNERSHIPLLC", "SCORPORATIONLLC", "LLC", "NOTLLC", "UNSPECIFIED" ]
     },
     "ShortCode" : {
       "type" : "string",
@@ -4193,7 +4198,7 @@ ul.nav-tabs {
     "Class" : {
       "type" : "string",
       "description" : "Organisation Classes describe which plan the Xero organisation is on (e.g. DEMO, TRIAL, PREMIUM)",
-      "enum" : [ "DEMO", "TRIAL", "STARTER", "STANDARD", "PREMIUM", "PREMIUM_20", "PREMIUM_50", "PREMIUM_100", "LEDGER", "GST_CASHBOOK", "NON_GST_CASHBOOK", "ULTIMATE", "LITE", "ULTIMATE_10", "ULTIMATE_20", "ULTIMATE_50", "ULTIMATE_100", "IGNITE", "GROW", "COMPREHENSIVE" ]
+      "enum" : [ "DEMO", "TRIAL", "STARTER", "STANDARD", "PREMIUM", "PREMIUM_20", "PREMIUM_50", "PREMIUM_100", "LEDGER", "GST_CASHBOOK", "NON_GST_CASHBOOK", "ULTIMATE", "LITE", "ULTIMATE_10", "ULTIMATE_20", "ULTIMATE_50", "ULTIMATE_100", "IGNITE", "GROW", "COMPREHENSIVE", "SIMPLE" ]
     },
     "Edition" : {
       "type" : "string",
@@ -4351,6 +4356,11 @@ ul.nav-tabs {
       "readOnly" : true,
       "example" : false,
       "default" : false
+    },
+    "Reference" : {
+      "type" : "string",
+      "description" : "An optional description for Overpayment",
+      "example" : "Ref for payment"
     },
     "Attachments" : {
       "type" : "array",
@@ -4748,6 +4758,11 @@ ul.nav-tabs {
       "description" : "Returns Invoice number field. Reference field isn't available.",
       "readOnly" : true
     },
+    "InvoiceNumber" : {
+      "type" : "string",
+      "description" : "Returns Invoice number for prepayment receive document only.",
+      "readOnly" : true
+    },
     "UpdatedDateUTC" : {
       "type" : "string",
       "description" : "UTC timestamp of last update to the prepayment",
@@ -4762,6 +4777,12 @@ ul.nav-tabs {
       "type" : "string",
       "description" : "Xero generated unique identifier",
       "format" : "uuid"
+    },
+    "BrandingThemeID" : {
+      "type" : "string",
+      "description" : "The unique identifier of the branding template applied to a receive prepayment",
+      "format" : "uuid",
+      "readOnly" : true
     },
     "CurrencyRate" : {
       "type" : "number",
@@ -6220,7 +6241,7 @@ ul.nav-tabs {
     "OrganisationRole" : {
       "type" : "string",
       "description" : "User role that defines permissions in Xero and via API (READONLY, INVOICEONLY, STANDARD, FINANCIALADVISER, etc)",
-      "enum" : [ "READONLY", "INVOICEONLY", "STANDARD", "FINANCIALADVISER", "MANAGEDCLIENT", "CASHBOOKCLIENT", "UNKNOWN" ]
+      "enum" : [ "READONLY", "INVOICEONLY", "STANDARD", "FINANCIALADVISER", "MANAGEDCLIENT", "CASHBOOKCLIENT", "UNKNOWN", "REMOVED" ]
     }
   },
   "description" : "",
@@ -6294,6 +6315,7 @@ ul.nav-tabs {
           <option data-url="https://xeroapi.github.io/xero-php-oauth2/docs/v2/projects/index.html" value="Project">Projects</option>
           <option data-url="https://xeroapi.github.io/xero-php-oauth2/docs/v2/files/index.html" value="Files">Files</option>
           <option data-url="https://xeroapi.github.io/xero-php-oauth2/docs/v2/payroll_au/index.html" value="PayrollAu">Payroll AU</option>
+          <option data-url="https://xeroapi.github.io/xero-php-oauth2/docs/v2/payroll_au_v2/index.html" value="PayrollAuV2">Payroll AU V2</option>
           <option data-url="https://xeroapi.github.io/xero-php-oauth2/docs/v2/payroll_uk/index.html" value="PayrollUk">Payroll UK</option>
           <option data-url="https://xeroapi.github.io/xero-php-oauth2/docs/v2/payroll_nz/index.html" value="PayrollNz">Payroll NZ</option>
           <option data-url="https://xeroapi.github.io/xero-php-oauth2/docs/v2/appstore/index.html" value="AppStore">App Store</option>
@@ -6338,7 +6360,7 @@ ul.nav-tabs {
           <nav id="scrollingNav">
             <ul class="sidenav nav nav-list">
               <li class="nav-header" data-group="Accounting"><strong>SDK: </strong><span id='sdk-name'></span></li>
-              <li class="nav-header" data-group="Accounting"><strong>VSN: </strong>8.0.0</li>
+              <li class="nav-header" data-group="Accounting"><strong>VSN: </strong>13.0.0</li>
               <li class="nav-header" data-group="Accounting"><a href="#api-Accounting">Methods</a></li>
               <li data-group="Accounting" data-name="createAccount" class="">
                 <a href="#api-Accounting-createAccount">createAccount</a>
@@ -6402,9 +6424,6 @@ ul.nav-tabs {
               </li>
               <li data-group="Accounting" data-name="createCurrency" class="">
                 <a href="#api-Accounting-createCurrency">createCurrency</a>
-              </li>
-              <li data-group="Accounting" data-name="createEmployees" class="">
-                <a href="#api-Accounting-createEmployees">createEmployees</a>
               </li>
               <li data-group="Accounting" data-name="createExpenseClaimHistory" class="">
                 <a href="#api-Accounting-createExpenseClaimHistory">createExpenseClaimHistory</a>
@@ -6678,12 +6697,6 @@ ul.nav-tabs {
               </li>
               <li data-group="Accounting" data-name="getCurrencies" class="">
                 <a href="#api-Accounting-getCurrencies">getCurrencies</a>
-              </li>
-              <li data-group="Accounting" data-name="getEmployee" class="">
-                <a href="#api-Accounting-getEmployee">getEmployee</a>
-              </li>
-              <li data-group="Accounting" data-name="getEmployees" class="">
-                <a href="#api-Accounting-getEmployees">getEmployees</a>
               </li>
               <li data-group="Accounting" data-name="getExpenseClaim" class="">
                 <a href="#api-Accounting-getExpenseClaim">getExpenseClaim</a>
@@ -6997,9 +7010,6 @@ ul.nav-tabs {
               <li data-group="Accounting" data-name="updateOrCreateCreditNotes" class="">
                 <a href="#api-Accounting-updateOrCreateCreditNotes">updateOrCreateCreditNotes</a>
               </li>
-              <li data-group="Accounting" data-name="updateOrCreateEmployees" class="">
-                <a href="#api-Accounting-updateOrCreateEmployees">updateOrCreateEmployees</a>
-              </li>
               <li data-group="Accounting" data-name="updateOrCreateInvoices" class="">
                 <a href="#api-Accounting-updateOrCreateInvoices">updateOrCreateInvoices</a>
               </li>
@@ -7210,7 +7220,12 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/Account"
       },
-      "example" : "{ \"Code\":\"123456\", \"Name\":\"Foobar\", \"Type\":\"EXPENSE\", \"Description\":\"Hello World\" }"
+      "example" : {
+        "Code" : "123456",
+        "Name" : "Foobar",
+        "Type" : "EXPENSE",
+        "Description" : "Hello World"
+      }
     }
   },
   "required" : true
@@ -7811,7 +7826,11 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/HistoryRecords"
       },
-      "example" : "{ \"HistoryRecords\": [ { \"Details\": \"Hello World\" } ] }"
+      "example" : {
+        "HistoryRecords" : [ {
+          "Details" : "Hello World"
+        } ]
+      }
     }
   },
   "required" : true
@@ -7983,7 +8002,23 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/BankTransactions"
       },
-      "example" : "{ bankTransactions: [{ type: BankTransaction.TypeEnum.SPEND, contact: { contactID: \"00000000-0000-0000-0000-000000000000\" }, lineItems: [{ description: \"Foobar\", quantity: 1.0, unitAmount: 20.0, accountCode: \"000\" } ], bankAccount: { code: \"000\" }}]}"
+      "example" : {
+        "bankTransactions" : [ {
+          "type" : "BankTransaction.TypeEnum.SPEND",
+          "contact" : {
+            "contactID" : "00000000-0000-0000-0000-000000000000"
+          },
+          "lineItems" : [ {
+            "description" : "Foobar",
+            "quantity" : 1.0,
+            "unitAmount" : 20.0,
+            "accountCode" : "000"
+          } ],
+          "bankAccount" : {
+            "code" : "000"
+          }
+        } ]
+      }
     }
   },
   "required" : true
@@ -8191,7 +8226,50 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/BankTransfers"
       },
-      "example" : "{ \"BankTransfers\": [ { \"FromBankAccount\": { \"Code\": \"090\", \"Name\": \"My Savings\", \"AccountID\": \"00000000-0000-0000-0000-000000000000\", \"Type\": \"BANK\", \"BankAccountNumber\": \"123455\", \"Status\": \"ACTIVE\", \"BankAccountType\": \"BANK\", \"CurrencyCode\": \"USD\", \"TaxType\": \"NONE\", \"EnablePaymentsToAccount\": false, \"ShowInExpenseClaims\": false, \"Class\": \"ASSET\", \"ReportingCode\": \"ASS\", \"ReportingCodeName\": \"Assets\", \"HasAttachments\": false, \"UpdatedDateUTC\": \"2016-10-17T13:45:33.993-07:00\" }, \"ToBankAccount\": { \"Code\": \"088\", \"Name\": \"Business Wells Fargo\", \"AccountID\": \"00000000-0000-0000-0000-000000000000\", \"Type\": \"BANK\", \"BankAccountNumber\": \"123455\", \"Status\": \"ACTIVE\", \"BankAccountType\": \"BANK\", \"CurrencyCode\": \"USD\", \"TaxType\": \"NONE\", \"EnablePaymentsToAccount\": false, \"ShowInExpenseClaims\": false, \"Class\": \"ASSET\", \"ReportingCode\": \"ASS\", \"ReportingCodeName\": \"Assets\", \"HasAttachments\": false, \"UpdatedDateUTC\": \"2016-06-03T08:31:14.517-07:00\" }, \"Amount\": \"50.00\", \"FromIsReconciled\": true, \"ToIsReconciled\": true, \"Reference\": \"Sub 098801\" } ] }"
+      "example" : {
+        "BankTransfers" : [ {
+          "FromBankAccount" : {
+            "Code" : "090",
+            "Name" : "My Savings",
+            "AccountID" : "00000000-0000-0000-0000-000000000000",
+            "Type" : "BANK",
+            "BankAccountNumber" : "123455",
+            "Status" : "ACTIVE",
+            "BankAccountType" : "BANK",
+            "CurrencyCode" : "USD",
+            "TaxType" : "NONE",
+            "EnablePaymentsToAccount" : false,
+            "ShowInExpenseClaims" : false,
+            "Class" : "ASSET",
+            "ReportingCode" : "ASS",
+            "ReportingCodeName" : "Assets",
+            "HasAttachments" : false,
+            "UpdatedDateUTC" : "2016-10-17T13:45:33.993-07:00"
+          },
+          "ToBankAccount" : {
+            "Code" : "088",
+            "Name" : "Business Wells Fargo",
+            "AccountID" : "00000000-0000-0000-0000-000000000000",
+            "Type" : "BANK",
+            "BankAccountNumber" : "123455",
+            "Status" : "ACTIVE",
+            "BankAccountType" : "BANK",
+            "CurrencyCode" : "USD",
+            "TaxType" : "NONE",
+            "EnablePaymentsToAccount" : false,
+            "ShowInExpenseClaims" : false,
+            "Class" : "ASSET",
+            "ReportingCode" : "ASS",
+            "ReportingCodeName" : "Assets",
+            "HasAttachments" : false,
+            "UpdatedDateUTC" : "2016-06-03T08:31:14.517-07:00"
+          },
+          "Amount" : "50.00",
+          "FromIsReconciled" : true,
+          "ToIsReconciled" : true,
+          "Reference" : "Sub 098801"
+        } ]
+      }
     }
   },
   "required" : true
@@ -8585,7 +8663,11 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/HistoryRecords"
       },
-      "example" : "{ \"HistoryRecords\": [ { \"Details\": \"Hello World\" } ] }"
+      "example" : {
+        "HistoryRecords" : [ {
+          "Details" : "Hello World"
+        } ]
+      }
     }
   },
   "required" : true
@@ -8760,7 +8842,28 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/BatchPayments"
       },
-      "example" : "{ \"BatchPayments\": [ { \"Account\": { \"AccountID\": \"00000000-0000-0000-0000-000000000000\" }, \"Reference\": \"ref\", \"Date\": \"2018-08-01\", \"Payments\": [ { \"Account\": { \"Code\": \"001\" }, \"Date\": \"2019-12-31\", \"Amount\": 500, \"Invoice\": { \"InvoiceID\": \"00000000-0000-0000-0000-000000000000\", \"LineItems\": [], \"Contact\": {}, \"Type\": \"ACCPAY\" } } ] } ] }"
+      "example" : {
+        "BatchPayments" : [ {
+          "Account" : {
+            "AccountID" : "00000000-0000-0000-0000-000000000000"
+          },
+          "Reference" : "ref",
+          "Date" : "2018-08-01",
+          "Payments" : [ {
+            "Account" : {
+              "Code" : "001"
+            },
+            "Date" : "2019-12-31",
+            "Amount" : 500,
+            "Invoice" : {
+              "InvoiceID" : "00000000-0000-0000-0000-000000000000",
+              "LineItems" : [ ],
+              "Contact" : { },
+              "Type" : "ACCPAY"
+            }
+          } ]
+        } ]
+      }
     }
   },
   "required" : true
@@ -8974,7 +9077,11 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/HistoryRecords"
       },
-      "example" : "{ \"HistoryRecords\": [ { \"Details\": \"Hello World\" } ] }"
+      "example" : {
+        "HistoryRecords" : [ {
+          "Details" : "Hello World"
+        } ]
+      }
     }
   },
   "required" : true
@@ -9164,7 +9271,15 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/PaymentServices"
       },
-      "example" : "{ \"PaymentServices\": [ { \"PaymentServiceID\": \"54b3b4f6-0443-4fba-bcd1-61ec0c35ca55\", \"PaymentServiceName\": \"PayUpNow\", \"PaymentServiceUrl\": \"https://www.payupnow.com/\", \"PaymentServiceType\": \"Custom\", \"PayNowText\": \"Time To Pay\" } ] }"
+      "example" : {
+        "PaymentServices" : [ {
+          "PaymentServiceID" : "54b3b4f6-0443-4fba-bcd1-61ec0c35ca55",
+          "PaymentServiceName" : "PayUpNow",
+          "PaymentServiceUrl" : "https://www.payupnow.com/",
+          "PaymentServiceType" : "Custom",
+          "PayNowText" : "Time To Pay"
+        } ]
+      }
     }
   },
   "required" : true
@@ -9524,7 +9639,11 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/ContactGroups"
       },
-      "example" : "{ \"ContactGroups\": [{ \"Name\": \"VIPs\" }]}"
+      "example" : {
+        "ContactGroups" : [ {
+          "Name" : "VIPs"
+        } ]
+      }
     }
   },
   "required" : true
@@ -9711,7 +9830,13 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/Contacts"
       },
-      "example" : "{ \"Contacts\": [ { \"ContactID\": \"a3675fc4-f8dd-4f03-ba5b-f1870566bcd7\" }, { \"ContactID\": \"4e1753b9-018a-4775-b6aa-1bc7871cfee3\" } ] }"
+      "example" : {
+        "Contacts" : [ {
+          "ContactID" : "a3675fc4-f8dd-4f03-ba5b-f1870566bcd7"
+        }, {
+          "ContactID" : "4e1753b9-018a-4775-b6aa-1bc7871cfee3"
+        } ]
+      }
     }
   },
   "required" : true
@@ -9898,7 +10023,11 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/HistoryRecords"
       },
-      "example" : "{ \"HistoryRecords\": [ { \"Details\": \"Hello World\" } ] }"
+      "example" : {
+        "HistoryRecords" : [ {
+          "Details" : "Hello World"
+        } ]
+      }
     }
   },
   "required" : true
@@ -10060,7 +10189,66 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/Contacts"
       },
-      "example" : "{ \"Contacts\": [ { \"ContactID\": \"3ff6d40c-af9a-40a3-89ce-3c1556a25591\", \"ContactStatus\": \"ACTIVE\", \"Name\": \"Foo9987\", \"EmailAddress\": \"sid32476@blah.com\", \"BankAccountDetails\": \"\", \"Addresses\": [ { \"AddressType\": \"STREET\", \"City\": \"\", \"Region\": \"\", \"PostalCode\": \"\", \"Country\": \"\" }, { \"AddressType\": \"POBOX\", \"City\": \"\", \"Region\": \"\", \"PostalCode\": \"\", \"Country\": \"\" } ], \"Phones\": [ { \"PhoneType\": \"DEFAULT\", \"PhoneNumber\": \"\", \"PhoneAreaCode\": \"\", \"PhoneCountryCode\": \"\" }, { \"PhoneType\": \"DDI\", \"PhoneNumber\": \"\", \"PhoneAreaCode\": \"\", \"PhoneCountryCode\": \"\" }, { \"PhoneType\": \"FAX\", \"PhoneNumber\": \"\", \"PhoneAreaCode\": \"\", \"PhoneCountryCode\": \"\" }, { \"PhoneType\": \"MOBILE\", \"PhoneNumber\": \"555-1212\", \"PhoneAreaCode\": \"415\", \"PhoneCountryCode\": \"\" } ], \"UpdatedDateUTC\": \"/Date(1551399321043+0000)/\", \"ContactGroups\": [], \"IsSupplier\": false, \"IsCustomer\": false, \"SalesTrackingCategories\": [], \"PurchasesTrackingCategories\": [], \"PaymentTerms\": { \"Bills\": { \"Day\": 15, \"Type\": \"OFCURRENTMONTH\" }, \"Sales\": { \"Day\": 10, \"Type\": \"DAYSAFTERBILLMONTH\" } }, \"ContactPersons\": [] } ] }"
+      "example" : {
+        "Contacts" : [ {
+          "ContactID" : "3ff6d40c-af9a-40a3-89ce-3c1556a25591",
+          "ContactStatus" : "ACTIVE",
+          "Name" : "Foo9987",
+          "EmailAddress" : "sid32476@blah.com",
+          "BankAccountDetails" : "",
+          "Addresses" : [ {
+            "AddressType" : "STREET",
+            "City" : "",
+            "Region" : "",
+            "PostalCode" : "",
+            "Country" : ""
+          }, {
+            "AddressType" : "POBOX",
+            "City" : "",
+            "Region" : "",
+            "PostalCode" : "",
+            "Country" : ""
+          } ],
+          "Phones" : [ {
+            "PhoneType" : "DEFAULT",
+            "PhoneNumber" : "",
+            "PhoneAreaCode" : "",
+            "PhoneCountryCode" : ""
+          }, {
+            "PhoneType" : "DDI",
+            "PhoneNumber" : "",
+            "PhoneAreaCode" : "",
+            "PhoneCountryCode" : ""
+          }, {
+            "PhoneType" : "FAX",
+            "PhoneNumber" : "",
+            "PhoneAreaCode" : "",
+            "PhoneCountryCode" : ""
+          }, {
+            "PhoneType" : "MOBILE",
+            "PhoneNumber" : "555-1212",
+            "PhoneAreaCode" : "415",
+            "PhoneCountryCode" : ""
+          } ],
+          "UpdatedDateUTC" : "/Date(1551399321043+0000)/",
+          "ContactGroups" : [ ],
+          "IsSupplier" : false,
+          "IsCustomer" : false,
+          "SalesTrackingCategories" : [ ],
+          "PurchasesTrackingCategories" : [ ],
+          "PaymentTerms" : {
+            "Bills" : {
+              "Day" : 15,
+              "Type" : "OFCURRENTMONTH"
+            },
+            "Sales" : {
+              "Day" : 10,
+              "Type" : "DAYSAFTERBILLMONTH"
+            }
+          },
+          "ContactPersons" : [ ]
+        } ]
+      }
     }
   },
   "required" : true
@@ -10281,7 +10469,16 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/Allocations"
       },
-      "example" : "{ \"Allocations\": [ { \"Invoice\": { \"LineItems\": [], \"InvoiceID\": \"c45720a1-ade3-4a38-a064-d15489be6841\" }, \"Amount\": 1, \"Date\": \"2019-03-05\" } ] }"
+      "example" : {
+        "Allocations" : [ {
+          "Invoice" : {
+            "LineItems" : [ ],
+            "InvoiceID" : "c45720a1-ade3-4a38-a064-d15489be6841"
+          },
+          "Amount" : 1,
+          "Date" : "2019-03-05"
+        } ]
+      }
     }
   },
   "required" : true
@@ -10730,7 +10927,11 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/HistoryRecords"
       },
-      "example" : "{ \"HistoryRecords\": [ { \"Details\": \"Hello World\" } ] }"
+      "example" : {
+        "HistoryRecords" : [ {
+          "Details" : "Hello World"
+        } ]
+      }
     }
   },
   "required" : true
@@ -10900,7 +11101,21 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/CreditNotes"
       },
-      "example" : "{ \"CreditNotes\":[ { \"Type\":\"ACCPAYCREDIT\", \"Contact\":{ \"ContactID\":\"430fa14a-f945-44d3-9f97-5df5e28441b8\" }, \"Date\":\"2019-01-05\", \"LineItems\":[ { \"Description\":\"Foobar\", \"Quantity\":2.0, \"UnitAmount\":20.0, \"AccountCode\":\"400\" } ] } ] }"
+      "example" : {
+        "CreditNotes" : [ {
+          "Type" : "ACCPAYCREDIT",
+          "Contact" : {
+            "ContactID" : "430fa14a-f945-44d3-9f97-5df5e28441b8"
+          },
+          "Date" : "2019-01-05",
+          "LineItems" : [ {
+            "Description" : "Foobar",
+            "Quantity" : 2.0,
+            "UnitAmount" : 20.0,
+            "AccountCode" : "400"
+          } ]
+        } ]
+      }
     }
   },
   "required" : true
@@ -11096,194 +11311,15 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/Currency"
       },
-      "example" : "{ \"Code\": \"USD\", \"Description\": \"United States Dollar\" }"
+      "example" : {
+        "Code" : "USD",
+        "Description" : "United States Dollar"
+      }
     }
   },
   "required" : true
 }
     </script>
-                  </table>
-                </article>
-              </div>
-              <hr>
-              <div id="api-Accounting-createEmployees">
-                <article id="api-Accounting-createEmployees-0" data-group="User" data-name="createEmployees" data-version="0">
-                  <div class="pull-left">
-                    <h1>createEmployees</h1>
-                    <p>Creates new employees used in Xero payrun</p>
-                  </div>
-                  <div class="pull-right"></div>
-                  <div class="clearfix"></div>
-                  <p></p>
-                  <p class="marked"></p>
-                  <p></p>
-                  <br />
-                  <pre class="prettyprint language-html prettyprinted" data-type="put"><code><span class="pln">/Employees</span></code></pre>
-                  <p>
-                  <h3>Usage and SDK Samples</h3>
-                  </p>
-                  <ul class="nav nav-tabs nav-tabs-examples">
-                    <!-- *****REPLACE***** comment out the other languages <li> -->
-                    <li class=""><a href="#examples-Accounting-createEmployees-0-php">PHP</a></li>
-                  </ul>
-                  <div class="tab-content">
-                    <!-- *****REPLACE***** comment out the other languages tab-pane -->
-                    <div class="tab-pane" id="examples-Accounting-createEmployees-0-php">
-                      <pre class="prettyprint"><code class="language-php"><&#63;php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-// Configure OAuth2 access token for authorization: OAuth2
-$config = XeroAPI\XeroPHP\Configuration::getDefaultConfiguration()->setAccessToken( 'YOUR_ACCESS_TOKEN' );       
-
-$apiInstance = new XeroAPI\XeroPHP\Api\AccountingApi(
-    new GuzzleHttp\Client(),
-    $config
-);
-$xeroTenantId = "YOUR_XERO_TENANT_ID";
-$summarizeErrors = true;
-$idempotencyKey = "KEY_VALUE";
-
-$employee = new XeroAPI\XeroPHP\Models\Accounting\Employee;
-$employee->setFirstName('Nick');
-$employee->setLastName('Fury');
-
-$employees = new XeroAPI\XeroPHP\Models\Accounting\Employees;
-$arr_employees = [];
-array_push($arr_employees, $employee);
-$employees->setEmployees($arr_employees);
-
-try {
-  $result = $apiInstance->createEmployees($xeroTenantId, $employees, $summarizeErrors, $idempotencyKey);
-} catch (Exception $e) {
-  echo 'Exception when calling AccountingApi->createEmployees: ', $e->getMessage(), PHP_EOL;
-}
-?>
-</code></pre>
-                    </div>
-                  </div>
-                  <h2>Scopes</h2>
-                  <table>
-                    
-                    <tr>
-                      <td>accounting.settings</td>
-                      <td>Grant read-write access to organisation and account settings</td>
-                    </tr>
-                    
-                  </table>
-                  <h2>Parameters</h2>
-                  <div class="methodsubtabletitle">Header parameters</div>
-                  <table id="methodsubtable">
-                    <tr>
-                      <th width="150px">Name</th>
-                      <th>Description</th>
-                    </tr>
-                    <tr><td style="width:150px;">xero-tenant-id<span style="color:red;">*</span></td>
-<td>
-
-
-    <div id="d2e199_createEmployees_xeroTenantId">
-        <div class="json-schema-view">
-            <div class="primitive">
-                <span class="type">
-                    String
-                </span>
-
-                    <div class="inner description marked">
-Xero identifier for Tenant
-                    </div>
-            </div>
-                <div class="inner required">
-                    Required
-                </div>
-        </div>
-    </div>
-</td>
-</tr>
-
-                    <tr><td style="width:150px;">Idempotency-Key</td>
-<td>
-
-
-    <div id="d2e199_createEmployees_idempotencyKey">
-        <div class="json-schema-view">
-            <div class="primitive">
-                <span class="type">
-                    String
-                </span>
-
-                    <div class="inner description marked">
-This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-                    </div>
-            </div>
-        </div>
-    </div>
-</td>
-</tr>
-
-                  </table>
-                  <div class="methodsubtabletitle">Body parameters</div>
-                  <table id="methodsubtable">
-                    <tr>
-                      <th width="150px">Name</th>
-                      <th>Description</th>
-                    </tr>
-                    <tr>
-  <td style="width:150px;">employees <span style="color:red;">*</span></td>
-  <td>
-    <div class="json-schema-view">
-      <div class="primitive">
-        <span class="type">
-        Employees
-        </span>
-        <div class="inner description marked">
-          Employees with array of Employee object in body of request
-        </div>
-      </div>
-      <div class="inner required">
-        Required
-      </div>
-    </div>
-    <script type="application/ld+json">
-      {
-  "description" : "Employees with array of Employee object in body of request",
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/Employees"
-      },
-      "example" : "{ \"Employees\": [ { \"FirstName\": \"Nick\", \"LastName\": \"Fury\", \"ExternalLink\": { \"Url\": \"http://twitter.com/#!/search/Nick+Fury\" } } ] }"
-    }
-  },
-  "required" : true
-}
-    </script>
-                  </table>
-                  <div class="methodsubtabletitle">Query parameters</div>
-                  <table id="methodsubtable">
-                    <tr>
-                      <th width="150px">Name</th>
-                      <th>Description</th>
-                    </tr>
-                    <tr><td style="width:150px;">summarizeErrors</td>
-<td>
-
-
-    <div id="d2e199_createEmployees_summarizeErrors">
-        <div class="json-schema-view">
-            <div class="primitive">
-                <span class="type">
-                    Boolean
-                </span>
-
-                    <div class="inner description marked">
-If false return 200 OK and mix of successfully created objects and any with validation errors
-                    </div>
-            </div>
-        </div>
-    </div>
-</td>
-</tr>
-
                   </table>
                 </article>
               </div>
@@ -11465,7 +11501,11 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/HistoryRecords"
       },
-      "example" : "{ \"HistoryRecords\": [ { \"Details\": \"Hello World\" } ] }"
+      "example" : {
+        "HistoryRecords" : [ {
+          "Details" : "Hello World"
+        } ]
+      }
     }
   },
   "required" : true
@@ -11630,7 +11670,18 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/ExpenseClaims"
       },
-      "example" : "{ \"ExpenseClaims\": [ { \"Status\": \"SUBMITTED\", \"User\": { \"UserID\": \"d1164823-0ac1-41ad-987b-b4e30fe0b273\" }, \"Receipts\": [ { \"Lineitems\": [], \"ReceiptID\": \"dc1c7f6d-0a4c-402f-acac-551d62ce5816\" } ] } ] }"
+      "example" : {
+        "ExpenseClaims" : [ {
+          "Status" : "SUBMITTED",
+          "User" : {
+            "UserID" : "d1164823-0ac1-41ad-987b-b4e30fe0b273"
+          },
+          "Receipts" : [ {
+            "Lineitems" : [ ],
+            "ReceiptID" : "dc1c7f6d-0a4c-402f-acac-551d62ce5816"
+          } ]
+        } ]
+      }
     }
   },
   "required" : true
@@ -12052,7 +12103,11 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/HistoryRecords"
       },
-      "example" : "{ \"HistoryRecords\": [ { \"Details\": \"Hello World\" } ] }"
+      "example" : {
+        "HistoryRecords" : [ {
+          "Details" : "Hello World"
+        } ]
+      }
     }
   },
   "required" : true
@@ -12233,7 +12288,26 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/Invoices"
       },
-      "example" : "{ \"Invoices\": [ { \"Type\": \"ACCREC\", \"Contact\": { \"ContactID\": \"430fa14a-f945-44d3-9f97-5df5e28441b8\" }, \"LineItems\": [ { \"Description\": \"Acme Tires\", \"Quantity\": 2, \"UnitAmount\": 20, \"AccountCode\": \"200\", \"TaxType\": \"NONE\", \"LineAmount\": 40 } ], \"Date\": \"2019-03-11\", \"DueDate\": \"2018-12-10\", \"Reference\": \"Website Design\", \"Status\": \"AUTHORISED\" } ] }"
+      "example" : {
+        "Invoices" : [ {
+          "Type" : "ACCREC",
+          "Contact" : {
+            "ContactID" : "430fa14a-f945-44d3-9f97-5df5e28441b8"
+          },
+          "LineItems" : [ {
+            "Description" : "Acme Tires",
+            "Quantity" : 2,
+            "UnitAmount" : 20,
+            "AccountCode" : "200",
+            "TaxType" : "NONE",
+            "LineAmount" : 40
+          } ],
+          "Date" : "2019-03-11",
+          "DueDate" : "2018-12-10",
+          "Reference" : "Website Design",
+          "Status" : "AUTHORISED"
+        } ]
+      }
     }
   },
   "required" : true
@@ -12467,7 +12541,11 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/HistoryRecords"
       },
-      "example" : "{ \"HistoryRecords\": [ { \"Details\": \"Hello World\" } ] }"
+      "example" : {
+        "HistoryRecords" : [ {
+          "Details" : "Hello World"
+        } ]
+      }
     }
   },
   "required" : true
@@ -12629,7 +12707,17 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/Items"
       },
-      "example" : "{ \"Items\": [ { \"Code\": \"code123\", \"Name\": \"Item Name XYZ\", \"Description\": \"Foobar\", \"InventoryAssetAccountCode\": \"140\", \"PurchaseDetails\": { \"COGSAccountCode\": \"500\" } } ] }"
+      "example" : {
+        "Items" : [ {
+          "Code" : "code123",
+          "Name" : "Item Name XYZ",
+          "Description" : "Foobar",
+          "InventoryAssetAccountCode" : "140",
+          "PurchaseDetails" : {
+            "COGSAccountCode" : "500"
+          }
+        } ]
+      }
     }
   },
   "required" : true
@@ -12825,7 +12913,12 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/LinkedTransaction"
       },
-      "example" : "{ \"LinkedTransactions\": [ { \"SourceTransactionID\": \"a848644a-f20f-4630-98c3-386bd7505631\", \"SourceLineItemID\": \"b0df260d-3cc8-4ced-9bd6-41924f624ed3\" } ] }"
+      "example" : {
+        "LinkedTransactions" : [ {
+          "SourceTransactionID" : "a848644a-f20f-4630-98c3-386bd7505631",
+          "SourceLineItemID" : "b0df260d-3cc8-4ced-9bd6-41924f624ed3"
+        } ]
+      }
     }
   },
   "required" : true
@@ -13219,7 +13312,11 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/HistoryRecords"
       },
-      "example" : "{ \"HistoryRecords\": [ { \"Details\": \"Hello World\" } ] }"
+      "example" : {
+        "HistoryRecords" : [ {
+          "Details" : "Hello World"
+        } ]
+      }
     }
   },
   "required" : true
@@ -13389,7 +13486,25 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/ManualJournals"
       },
-      "example" : "{ \"ManualJournals\": [ { \"Narration\": \"Journal Desc\", \"JournalLines\": [ { \"LineAmount\": 100, \"AccountCode\": \"400\", \"Description\": \"Money Movement\" }, { \"LineAmount\": -100, \"AccountCode\": \"400\", \"Description\": \"Prepayment of things\", \"Tracking\": [ { \"Name\": \"North\", \"Option\": \"Region\" } ] } ], \"Date\": \"2019-03-14\" } ] }"
+      "example" : {
+        "ManualJournals" : [ {
+          "Narration" : "Journal Desc",
+          "JournalLines" : [ {
+            "LineAmount" : 100,
+            "AccountCode" : "400",
+            "Description" : "Money Movement"
+          }, {
+            "LineAmount" : -100,
+            "AccountCode" : "400",
+            "Description" : "Prepayment of things",
+            "Tracking" : [ {
+              "Name" : "North",
+              "Option" : "Region"
+            } ]
+          } ],
+          "Date" : "2019-03-14"
+        } ]
+      }
     }
   },
   "required" : true
@@ -13610,7 +13725,18 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/Allocations"
       },
-      "example" : "{ \"Allocations\": [ { \"Invoice\": { \"InvoiceID\": \"00000000-0000-0000-0000-000000000000\", \"LineItems\": [], \"Contact\": {}, \"Type\": \"ACCPAY\" }, \"Amount\": 10.00, \"Date\": \"2019-03-12\" } ] }"
+      "example" : {
+        "Allocations" : [ {
+          "Invoice" : {
+            "InvoiceID" : "00000000-0000-0000-0000-000000000000",
+            "LineItems" : [ ],
+            "Contact" : { },
+            "Type" : "ACCPAY"
+          },
+          "Amount" : 10.0,
+          "Date" : "2019-03-12"
+        } ]
+      }
     }
   },
   "required" : true
@@ -13824,7 +13950,11 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/HistoryRecords"
       },
-      "example" : "{ \"HistoryRecords\": [ { \"Details\": \"Hello World\" } ] }"
+      "example" : {
+        "HistoryRecords" : [ {
+          "Details" : "Hello World"
+        } ]
+      }
     }
   },
   "required" : true
@@ -13987,7 +14117,19 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/Payment"
       },
-      "example" : "{ \"Payments\": [ { \"Invoice\": { \"LineItems\": [], \"InvoiceID\": \"00000000-0000-0000-0000-000000000000\" }, \"Account\": { \"Code\": \"970\" }, \"Date\": \"2019-03-12\", \"Amount\": 1 } ] }"
+      "example" : {
+        "Payments" : [ {
+          "Invoice" : {
+            "LineItems" : [ ],
+            "InvoiceID" : "00000000-0000-0000-0000-000000000000"
+          },
+          "Account" : {
+            "Code" : "970"
+          },
+          "Date" : "2019-03-12",
+          "Amount" : 1
+        } ]
+      }
     }
   },
   "required" : true
@@ -14174,7 +14316,11 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/HistoryRecords"
       },
-      "example" : "{ \"HistoryRecords\": [ { \"Details\": \"Hello World\" } ] }"
+      "example" : {
+        "HistoryRecords" : [ {
+          "Details" : "Hello World"
+        } ]
+      }
     }
   },
   "required" : true
@@ -14329,7 +14475,13 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/PaymentServices"
       },
-      "example" : "{ \"PaymentServices\": [ { \"PaymentServiceName\": \"PayUpNow\", \"PaymentServiceUrl\": \"https://www.payupnow.com/\", \"PayNowText\": \"Time To Pay\" } ] }"
+      "example" : {
+        "PaymentServices" : [ {
+          "PaymentServiceName" : "PayUpNow",
+          "PaymentServiceUrl" : "https://www.payupnow.com/",
+          "PayNowText" : "Time To Pay"
+        } ]
+      }
     }
   },
   "required" : true
@@ -14493,7 +14645,19 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/Payments"
       },
-      "example" : "{ \"Payments\": [ { \"Invoice\": { \"LineItems\": [], \"InvoiceID\": \"00000000-0000-0000-0000-000000000000\" }, \"Account\": { \"Code\": \"970\" }, \"Date\": \"2019-03-12\", \"Amount\": 1 } ] }"
+      "example" : {
+        "Payments" : [ {
+          "Invoice" : {
+            "LineItems" : [ ],
+            "InvoiceID" : "00000000-0000-0000-0000-000000000000"
+          },
+          "Account" : {
+            "Code" : "970"
+          },
+          "Date" : "2019-03-12",
+          "Amount" : 1
+        } ]
+      }
     }
   },
   "required" : true
@@ -14714,7 +14878,16 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/Allocations"
       },
-      "example" : "{ \"Allocations\": [ { \"Invoice\": { \"LineItems\": [], \"InvoiceID\": \"00000000-0000-0000-0000-000000000000\" }, \"Amount\": 1, \"Date\": \"2019-01-10\" } ] }"
+      "example" : {
+        "Allocations" : [ {
+          "Invoice" : {
+            "LineItems" : [ ],
+            "InvoiceID" : "00000000-0000-0000-0000-000000000000"
+          },
+          "Amount" : 1,
+          "Date" : "2019-01-10"
+        } ]
+      }
     }
   },
   "required" : true
@@ -14928,7 +15101,11 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/HistoryRecords"
       },
-      "example" : "{ \"HistoryRecords\": [ { \"Details\": \"Hello World\" } ] }"
+      "example" : {
+        "HistoryRecords" : [ {
+          "Details" : "Hello World"
+        } ]
+      }
     }
   },
   "required" : true
@@ -15322,7 +15499,11 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/HistoryRecords"
       },
-      "example" : "{ \"HistoryRecords\": [ { \"Details\": \"Hello World\" } ] }"
+      "example" : {
+        "HistoryRecords" : [ {
+          "Details" : "Hello World"
+        } ]
+      }
     }
   },
   "required" : true
@@ -15490,7 +15671,20 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/PurchaseOrders"
       },
-      "example" : "{ \"PurchaseOrders\": [ { \"Contact\": { \"ContactID\": \"00000000-0000-0000-0000-000000000000\" }, \"LineItems\": [ { \"Description\": \"Foobar\", \"Quantity\": 1, \"UnitAmount\": 20, \"AccountCode\": \"710\" } ], \"Date\": \"2019-03-13\" } ] }"
+      "example" : {
+        "PurchaseOrders" : [ {
+          "Contact" : {
+            "ContactID" : "00000000-0000-0000-0000-000000000000"
+          },
+          "LineItems" : [ {
+            "Description" : "Foobar",
+            "Quantity" : 1,
+            "UnitAmount" : 20,
+            "AccountCode" : "710"
+          } ],
+          "Date" : "2019-03-13"
+        } ]
+      }
     }
   },
   "required" : true
@@ -15911,7 +16105,11 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/HistoryRecords"
       },
-      "example" : "{ \"HistoryRecords\": [ { \"Details\": \"Hello World\" } ] }"
+      "example" : {
+        "HistoryRecords" : [ {
+          "Details" : "Hello World"
+        } ]
+      }
     }
   },
   "required" : true
@@ -16079,7 +16277,20 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/Quotes"
       },
-      "example" : "{ \"Quotes\": [ { \"Contact\": { \"ContactID\": \"00000000-0000-0000-0000-000000000000\" }, \"LineItems\": [ { \"Description\": \"Foobar\", \"Quantity\": 1, \"UnitAmount\": 20, \"AccountCode\": \"12775\" } ], \"Date\": \"2020-02-01\" } ] }"
+      "example" : {
+        "Quotes" : [ {
+          "Contact" : {
+            "ContactID" : "00000000-0000-0000-0000-000000000000"
+          },
+          "LineItems" : [ {
+            "Description" : "Foobar",
+            "Quantity" : 1,
+            "UnitAmount" : 20,
+            "AccountCode" : "12775"
+          } ],
+          "Date" : "2020-02-01"
+        } ]
+      }
     }
   },
   "required" : true
@@ -16278,7 +16489,26 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/Receipts"
       },
-      "example" : "{ \"Receipts\": [ { \"Contact\": { \"ContactID\": \"00000000-0000-0000-0000-000000000000\" }, \"Lineitems\": [ { \"Description\": \"Foobar\", \"Quantity\": 2, \"UnitAmount\": 20, \"AccountCode\": \"400\", \"TaxType\": \"NONE\", \"LineAmount\": 40 } ], \"User\": { \"UserID\": \"00000000-0000-0000-0000-000000000000\" }, \"LineAmountTypes\": \"NoTax\", \"Status\": \"DRAFT\" } ] }"
+      "example" : {
+        "Receipts" : [ {
+          "Contact" : {
+            "ContactID" : "00000000-0000-0000-0000-000000000000"
+          },
+          "Lineitems" : [ {
+            "Description" : "Foobar",
+            "Quantity" : 2,
+            "UnitAmount" : 20,
+            "AccountCode" : "400",
+            "TaxType" : "NONE",
+            "LineAmount" : 40
+          } ],
+          "User" : {
+            "UserID" : "00000000-0000-0000-0000-000000000000"
+          },
+          "LineAmountTypes" : "NoTax",
+          "Status" : "DRAFT"
+        } ]
+      }
     }
   },
   "required" : true
@@ -16699,7 +16929,11 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/HistoryRecords"
       },
-      "example" : "{ \"HistoryRecords\": [ { \"Details\": \"Hello World\" } ] }"
+      "example" : {
+        "HistoryRecords" : [ {
+          "Details" : "Hello World"
+        } ]
+      }
     }
   },
   "required" : true
@@ -17093,7 +17327,11 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/HistoryRecords"
       },
-      "example" : "{ \"HistoryRecords\": [ { \"Details\": \"Hello World\" } ] }"
+      "example" : {
+        "HistoryRecords" : [ {
+          "Details" : "Hello World"
+        } ]
+      }
     }
   },
   "required" : true
@@ -17239,7 +17477,42 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/RepeatingInvoices"
       },
-      "example" : "{ \"RepeatingInvoices\": [ { \"Schedule\": { \"Period\": 1, \"Unit\": \"MONTHLY\", \"DueDate\": 10, \"DueDateType\": \"OFFOLLOWINGMONTH\", \"StartDate\": \"\\/Date(1555286400000+0000)\\/\" }, \"Type\": \"ACCREC\", \"Reference\": \"[Week]\", \"ApprovedForSending\": false, \"SendCopy\": false, \"MarkAsSent\": false, \"IncludePDF\": false, \"Contact\": { \"ContactID\": \"430fa14a-f945-44d3-9f97-5df5e28441b8\", \"Name\": \"Liam Gallagher\" }, \"Status\": \"AUTHORISED\", \"LineAmountTypes\": \"Exclusive\", \"LineItems\": [ { \"Description\": \"Guitars Fender Strat\", \"UnitAmount\": 5000.00, \"TaxType\": \"OUTPUT2\", \"TaxAmount\": 750.00, \"LineAmount\": 5000.00, \"AccountCode\": \"200\", \"Tracking\": [], \"Quantity\": 1.0000, \"LineItemID\": \"13a8353c-d2af-4d5b-920c-438449f08900\", \"DiscountEnteredAsPercent\": true } ], \"CurrencyCode\": \"NZD\" } ] }"
+      "example" : {
+        "RepeatingInvoices" : [ {
+          "Schedule" : {
+            "Period" : 1,
+            "Unit" : "MONTHLY",
+            "DueDate" : 10,
+            "DueDateType" : "OFFOLLOWINGMONTH",
+            "StartDate" : "/Date(1555286400000+0000)/"
+          },
+          "Type" : "ACCREC",
+          "Reference" : "[Week]",
+          "ApprovedForSending" : false,
+          "SendCopy" : false,
+          "MarkAsSent" : false,
+          "IncludePDF" : false,
+          "Contact" : {
+            "ContactID" : "430fa14a-f945-44d3-9f97-5df5e28441b8",
+            "Name" : "Liam Gallagher"
+          },
+          "Status" : "AUTHORISED",
+          "LineAmountTypes" : "Exclusive",
+          "LineItems" : [ {
+            "Description" : "Guitars Fender Strat",
+            "UnitAmount" : 5000.0,
+            "TaxType" : "OUTPUT2",
+            "TaxAmount" : 750.0,
+            "LineAmount" : 5000.0,
+            "AccountCode" : "200",
+            "Tracking" : [ ],
+            "Quantity" : 1.0,
+            "LineItemID" : "13a8353c-d2af-4d5b-920c-438449f08900",
+            "DiscountEnteredAsPercent" : true
+          } ],
+          "CurrencyCode" : "NZD"
+        } ]
+      }
     }
   },
   "required" : true
@@ -17426,7 +17699,15 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/TaxRates"
       },
-      "example" : "{ \"TaxRates\": [ { \"Name\": \"CA State Tax\", \"TaxComponents\": [ { \"Name\": \"State Tax\", \"Rate\": 2.25 } ] } ] }"
+      "example" : {
+        "TaxRates" : [ {
+          "Name" : "CA State Tax",
+          "TaxComponents" : [ {
+            "Name" : "State Tax",
+            "Rate" : 2.25
+          } ]
+        } ]
+      }
     }
   },
   "required" : true
@@ -17574,7 +17855,9 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/TrackingCategory"
       },
-      "example" : "{ name: \"FooBar\" }"
+      "example" : {
+        "name" : "FooBar"
+      }
     }
   },
   "required" : true
@@ -17756,7 +18039,9 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/TrackingOption"
       },
-      "example" : "{ name: \" Bar\" }"
+      "example" : {
+        "name" : " Bar"
+      }
     }
   },
   "required" : true
@@ -18025,7 +18310,10 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/BatchPaymentDelete"
       },
-      "example" : "{ \"BatchPaymentID\": \"9bf296e9-0748-4d29-a3dc-24dde1098030\", \"Status\":\"DELETED\" }"
+      "example" : {
+        "BatchPaymentID" : "9bf296e9-0748-4d29-a3dc-24dde1098030",
+        "Status" : "DELETED"
+      }
     }
   },
   "required" : true
@@ -18203,7 +18491,9 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/BatchPaymentDeleteByUrlParam"
       },
-      "example" : "{ \"Status\":\"DELETED\" }"
+      "example" : {
+        "Status" : "DELETED"
+      }
     }
   },
   "required" : true
@@ -19191,7 +19481,11 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/PaymentDelete"
       },
-      "example" : "{ \"Payments\":[ { \"Status\":\"DELETED\" } ] }"
+      "example" : {
+        "Payments" : [ {
+          "Status" : "DELETED"
+        } ]
+      }
     }
   },
   "required" : true
@@ -19788,7 +20082,7 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/RequestEmpty"
       },
-      "example" : "{}"
+      "example" : { }
     }
   },
   "required" : true
@@ -23253,7 +23547,7 @@ try {
                     
                     <tr>
                       <td>accounting.budgets.read</td>
-                      <td></td>
+                      <td>Grant read-only access to read budgets</td>
                     </tr>
                     
                   </table>
@@ -23429,7 +23723,7 @@ try {
                     
                     <tr>
                       <td>accounting.budgets.read</td>
-                      <td></td>
+                      <td>Grant read-only access to read budgets</td>
                     </tr>
                     
                   </table>
@@ -26315,297 +26609,6 @@ Filter by an any element
 
 
     <div id="d2e199_getCurrencies_order">
-        <div class="json-schema-view">
-            <div class="primitive">
-                <span class="type">
-                    String
-                </span>
-
-                    <div class="inner description marked">
-Order by an any element
-                    </div>
-            </div>
-        </div>
-    </div>
-</td>
-</tr>
-
-                  </table>
-                </article>
-              </div>
-              <hr>
-              <div id="api-Accounting-getEmployee">
-                <article id="api-Accounting-getEmployee-0" data-group="User" data-name="getEmployee" data-version="0">
-                  <div class="pull-left">
-                    <h1>getEmployee</h1>
-                    <p>Retrieves a specific employee used in Xero payrun using a unique employee Id</p>
-                  </div>
-                  <div class="pull-right"></div>
-                  <div class="clearfix"></div>
-                  <p></p>
-                  <p class="marked"></p>
-                  <p></p>
-                  <br />
-                  <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/Employees/{EmployeeID}</span></code></pre>
-                  <p>
-                  <h3>Usage and SDK Samples</h3>
-                  </p>
-                  <ul class="nav nav-tabs nav-tabs-examples">
-                    <!-- *****REPLACE***** comment out the other languages <li> -->
-                    <li class=""><a href="#examples-Accounting-getEmployee-0-php">PHP</a></li>
-                  </ul>
-                  <div class="tab-content">
-                    <!-- *****REPLACE***** comment out the other languages tab-pane -->
-                    <div class="tab-pane" id="examples-Accounting-getEmployee-0-php">
-                      <pre class="prettyprint"><code class="language-php"><&#63;php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-// Configure OAuth2 access token for authorization: OAuth2
-$config = XeroAPI\XeroPHP\Configuration::getDefaultConfiguration()->setAccessToken( 'YOUR_ACCESS_TOKEN' );       
-
-$apiInstance = new XeroAPI\XeroPHP\Api\AccountingApi(
-    new GuzzleHttp\Client(),
-    $config
-);
-$xeroTenantId = "YOUR_XERO_TENANT_ID";
-$employeeID = "00000000-0000-0000-0000-000000000000";
-
-try {
-  $result = $apiInstance->getEmployee($xeroTenantId, $employeeID);
-} catch (Exception $e) {
-  echo 'Exception when calling AccountingApi->getEmployee: ', $e->getMessage(), PHP_EOL;
-}
-?>
-</code></pre>
-                    </div>
-                  </div>
-                  <h2>Scopes</h2>
-                  <table>
-                    
-                    <tr>
-                      <td>accounting.settings</td>
-                      <td>Grant read-write access to organisation and account settings</td>
-                    </tr>
-                    
-                    <tr>
-                      <td>accounting.settings.read</td>
-                      <td>Grant read-only access to organisation and account settings</td>
-                    </tr>
-                    
-                  </table>
-                  <h2>Parameters</h2>
-                  <div class="methodsubtabletitle">Path parameters</div>
-                  <table id="methodsubtable">
-                    <tr>
-                      <th width="150px">Name</th>
-                      <th>Description</th>
-                    </tr>
-                    <tr><td style="width:150px;">EmployeeID<span style="color:red;">*</span></td>
-<td>
-
-
-    <div id="d2e199_getEmployee_employeeID">
-        <div class="json-schema-view">
-            <div class="primitive">
-                <span class="type">
-                    UUID
-                </span>
-                    <span class="format">
-                        (uuid)
-                    </span>
-
-                    <div class="inner description marked">
-Unique identifier for a Employee
-                    </div>
-            </div>
-                <div class="inner required">
-                    Required
-                </div>
-        </div>
-    </div>
-</td>
-</tr>
-
-                  </table>
-                  <div class="methodsubtabletitle">Header parameters</div>
-                  <table id="methodsubtable">
-                    <tr>
-                      <th width="150px">Name</th>
-                      <th>Description</th>
-                    </tr>
-                    <tr><td style="width:150px;">xero-tenant-id<span style="color:red;">*</span></td>
-<td>
-
-
-    <div id="d2e199_getEmployee_xeroTenantId">
-        <div class="json-schema-view">
-            <div class="primitive">
-                <span class="type">
-                    String
-                </span>
-
-                    <div class="inner description marked">
-Xero identifier for Tenant
-                    </div>
-            </div>
-                <div class="inner required">
-                    Required
-                </div>
-        </div>
-    </div>
-</td>
-</tr>
-
-                  </table>
-                </article>
-              </div>
-              <hr>
-              <div id="api-Accounting-getEmployees">
-                <article id="api-Accounting-getEmployees-0" data-group="User" data-name="getEmployees" data-version="0">
-                  <div class="pull-left">
-                    <h1>getEmployees</h1>
-                    <p>Retrieves employees used in Xero payrun</p>
-                  </div>
-                  <div class="pull-right"></div>
-                  <div class="clearfix"></div>
-                  <p></p>
-                  <p class="marked"></p>
-                  <p></p>
-                  <br />
-                  <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/Employees</span></code></pre>
-                  <p>
-                  <h3>Usage and SDK Samples</h3>
-                  </p>
-                  <ul class="nav nav-tabs nav-tabs-examples">
-                    <!-- *****REPLACE***** comment out the other languages <li> -->
-                    <li class=""><a href="#examples-Accounting-getEmployees-0-php">PHP</a></li>
-                  </ul>
-                  <div class="tab-content">
-                    <!-- *****REPLACE***** comment out the other languages tab-pane -->
-                    <div class="tab-pane" id="examples-Accounting-getEmployees-0-php">
-                      <pre class="prettyprint"><code class="language-php"><&#63;php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-// Configure OAuth2 access token for authorization: OAuth2
-$config = XeroAPI\XeroPHP\Configuration::getDefaultConfiguration()->setAccessToken( 'YOUR_ACCESS_TOKEN' );       
-
-$apiInstance = new XeroAPI\XeroPHP\Api\AccountingApi(
-    new GuzzleHttp\Client(),
-    $config
-);
-$xeroTenantId = "YOUR_XERO_TENANT_ID";
-$ifModifiedSince = new DateTime("2020-02-06T12:17:43.202-08:00");
-$where = "Status==&quot;&apos; . \XeroAPI\XeroPHP\Models\Accounting\Employee::STATUS_ACTIVE . &apos;&quot;";
-$order = "LastName ASC";
-
-try {
-  $result = $apiInstance->getEmployees($xeroTenantId, $ifModifiedSince, $where, $order);
-} catch (Exception $e) {
-  echo 'Exception when calling AccountingApi->getEmployees: ', $e->getMessage(), PHP_EOL;
-}
-?>
-</code></pre>
-                    </div>
-                  </div>
-                  <h2>Scopes</h2>
-                  <table>
-                    
-                    <tr>
-                      <td>accounting.settings</td>
-                      <td>Grant read-write access to organisation and account settings</td>
-                    </tr>
-                    
-                    <tr>
-                      <td>accounting.settings.read</td>
-                      <td>Grant read-only access to organisation and account settings</td>
-                    </tr>
-                    
-                  </table>
-                  <h2>Parameters</h2>
-                  <div class="methodsubtabletitle">Header parameters</div>
-                  <table id="methodsubtable">
-                    <tr>
-                      <th width="150px">Name</th>
-                      <th>Description</th>
-                    </tr>
-                    <tr><td style="width:150px;">xero-tenant-id<span style="color:red;">*</span></td>
-<td>
-
-
-    <div id="d2e199_getEmployees_xeroTenantId">
-        <div class="json-schema-view">
-            <div class="primitive">
-                <span class="type">
-                    String
-                </span>
-
-                    <div class="inner description marked">
-Xero identifier for Tenant
-                    </div>
-            </div>
-                <div class="inner required">
-                    Required
-                </div>
-        </div>
-    </div>
-</td>
-</tr>
-
-                    <tr><td style="width:150px;">If-Modified-Since</td>
-<td>
-
-
-    <div id="d2e199_getEmployees_ifModifiedSince">
-        <div class="json-schema-view">
-            <div class="primitive">
-                <span class="type">
-                    Date
-                </span>
-                    <span class="format">
-                        (date-time)
-                    </span>
-
-                    <div class="inner description marked">
-Only records created or modified since this timestamp will be returned
-                    </div>
-            </div>
-        </div>
-    </div>
-</td>
-</tr>
-
-                  </table>
-                  <div class="methodsubtabletitle">Query parameters</div>
-                  <table id="methodsubtable">
-                    <tr>
-                      <th width="150px">Name</th>
-                      <th>Description</th>
-                    </tr>
-                    <tr><td style="width:150px;">where</td>
-<td>
-
-
-    <div id="d2e199_getEmployees_where">
-        <div class="json-schema-view">
-            <div class="primitive">
-                <span class="type">
-                    String
-                </span>
-
-                    <div class="inner description marked">
-Filter by an any element
-                    </div>
-            </div>
-        </div>
-    </div>
-</td>
-</tr>
-
-                    <tr><td style="width:150px;">order</td>
-<td>
-
-
-    <div id="d2e199_getEmployees_order">
         <div class="json-schema-view">
             <div class="primitive">
                 <span class="type">
@@ -31311,9 +31314,10 @@ $order = "Status ASC";
 $page = 1;
 $unitdp = 4;
 $pageSize = 100;
+$references = array(&quot;Ref1&quot;, &quot;Ref2&quot;)
 
 try {
-  $result = $apiInstance->getOverpayments($xeroTenantId, $ifModifiedSince, $where, $order, $page, $unitdp, $pageSize);
+  $result = $apiInstance->getOverpayments($xeroTenantId, $ifModifiedSince, $where, $order, $page, $unitdp, $pageSize, $references);
 } catch (Exception $e) {
   echo 'Exception when calling AccountingApi->getOverpayments: ', $e->getMessage(), PHP_EOL;
 }
@@ -31488,6 +31492,26 @@ e.g. unitdp=4 – (Unit Decimal Places) You can opt in to use four decimal place
 
                     <div class="inner description marked">
 Number of records to retrieve per page
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                    <tr><td style="width:150px;">References</td>
+<td>
+
+
+    <div id="d2e199_getOverpayments_references">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    array[String]
+                </span>
+
+                    <div class="inner description marked">
+Filter by a comma-separated list of References
                     </div>
             </div>
         </div>
@@ -32337,9 +32361,10 @@ $order = "Reference ASC";
 $page = 1;
 $unitdp = 4;
 $pageSize = 100;
+$invoiceNumbers = array(&quot;INV-001&quot;, &quot;INV-002&quot;)
 
 try {
-  $result = $apiInstance->getPrepayments($xeroTenantId, $ifModifiedSince, $where, $order, $page, $unitdp, $pageSize);
+  $result = $apiInstance->getPrepayments($xeroTenantId, $ifModifiedSince, $where, $order, $page, $unitdp, $pageSize, $invoiceNumbers);
 } catch (Exception $e) {
   echo 'Exception when calling AccountingApi->getPrepayments: ', $e->getMessage(), PHP_EOL;
 }
@@ -32514,6 +32539,26 @@ e.g. unitdp=4 – (Unit Decimal Places) You can opt in to use four decimal place
 
                     <div class="inner description marked">
 Number of records to retrieve per page
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                    <tr><td style="width:150px;">InvoiceNumbers</td>
+<td>
+
+
+    <div id="d2e199_getPrepayments_invoiceNumbers">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    array[String]
+                </span>
+
+                    <div class="inner description marked">
+Filter by a comma-separated list of InvoiceNumbers
                     </div>
             </div>
         </div>
@@ -39566,7 +39611,33 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/Setup"
       },
-      "example" : "{ \"ConversionDate\": {}, \"ConversionBalances\": [], \"Accounts\": [ { \"Code\": \"200\", \"Name\": \"Sales\", \"Type\": \"SALES\", \"ReportingCode\": \"REV.TRA.GOO\" }, { \"Code\": \"400\", \"Name\": \"Advertising\", \"Type\": \"OVERHEADS\", \"ReportingCode\": \"EXP\" }, { \"Code\": \"610\", \"Name\": \"Accounts Receivable\", \"Type\": \"CURRENT\", \"SystemAccount\": \"DEBTORS\", \"ReportingCode\": \"ASS.CUR.REC.TRA\" }, { \"Code\": \"800\", \"Name\": \"Accounts Payable\", \"Type\": \"CURRLIAB\", \"SystemAccount\": \"CREDITORS\", \"ReportingCode\": \"LIA.CUR.PAY\" } ] }"
+      "example" : {
+        "ConversionDate" : { },
+        "ConversionBalances" : [ ],
+        "Accounts" : [ {
+          "Code" : "200",
+          "Name" : "Sales",
+          "Type" : "SALES",
+          "ReportingCode" : "REV.TRA.GOO"
+        }, {
+          "Code" : "400",
+          "Name" : "Advertising",
+          "Type" : "OVERHEADS",
+          "ReportingCode" : "EXP"
+        }, {
+          "Code" : "610",
+          "Name" : "Accounts Receivable",
+          "Type" : "CURRENT",
+          "SystemAccount" : "DEBTORS",
+          "ReportingCode" : "ASS.CUR.REC.TRA"
+        }, {
+          "Code" : "800",
+          "Name" : "Accounts Payable",
+          "Type" : "CURRLIAB",
+          "SystemAccount" : "CREDITORS",
+          "ReportingCode" : "LIA.CUR.PAY"
+        } ]
+      }
     }
   },
   "required" : true
@@ -39757,7 +39828,22 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/Accounts"
       },
-      "example" : "{ \"Accounts\":[ { \"Code\":\"123456\", \"Name\":\"BarFoo\", \"AccountID\":\"99ce6032-0678-4aa0-8148-240c75fee33a\", \"Type\":\"EXPENSE\", \"Description\":\"GoodBye World\", \"TaxType\":\"INPUT\", \"EnablePaymentsToAccount\":false, \"ShowInExpenseClaims\":false, \"Class\":\"EXPENSE\", \"ReportingCode\":\"EXP\", \"ReportingCodeName\":\"Expense\", \"UpdatedDateUTC\":\"2019-02-21T16:29:47.96-08:00\" } ] }"
+      "example" : {
+        "Accounts" : [ {
+          "Code" : "123456",
+          "Name" : "BarFoo",
+          "AccountID" : "99ce6032-0678-4aa0-8148-240c75fee33a",
+          "Type" : "EXPENSE",
+          "Description" : "GoodBye World",
+          "TaxType" : "INPUT",
+          "EnablePaymentsToAccount" : false,
+          "ShowInExpenseClaims" : false,
+          "Class" : "EXPENSE",
+          "ReportingCode" : "EXP",
+          "ReportingCodeName" : "Expense",
+          "UpdatedDateUTC" : "2019-02-21T16:29:47.96-08:00"
+        } ]
+      }
     }
   },
   "required" : true
@@ -40169,7 +40255,77 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/BankTransactions"
       },
-      "example" : "{ \"BankTransactions\": [ { \"Type\": \"SPEND\", \"Contact\": { \"ContactID\": \"00000000-0000-0000-0000-000000000000\", \"ContactStatus\": \"ACTIVE\", \"Name\": \"Buzz Lightyear\", \"FirstName\": \"Buzz\", \"LastName\": \"Lightyear\", \"EmailAddress\": \"buzz.Lightyear@email.com\", \"ContactPersons\": [], \"BankAccountDetails\": \"\", \"Addresses\": [ { \"AddressType\": \"STREET\", \"City\": \"\", \"Region\": \"\", \"PostalCode\": \"\", \"Country\": \"\" }, { \"AddressType\": \"POBOX\", \"AddressLine1\": \"\", \"AddressLine2\": \"\", \"AddressLine3\": \"\", \"AddressLine4\": \"\", \"City\": \"Palo Alto\", \"Region\": \"CA\", \"PostalCode\": \"94020\", \"Country\": \"United States\" } ], \"Phones\": [ { \"PhoneType\": \"DEFAULT\", \"PhoneNumber\": \"847-1294\", \"PhoneAreaCode\": \"(626)\", \"PhoneCountryCode\": \"\" }, { \"PhoneType\": \"DDI\", \"PhoneNumber\": \"\", \"PhoneAreaCode\": \"\", \"PhoneCountryCode\": \"\" }, { \"PhoneType\": \"FAX\", \"PhoneNumber\": \"\", \"PhoneAreaCode\": \"\", \"PhoneCountryCode\": \"\" }, { \"PhoneType\": \"MOBILE\", \"PhoneNumber\": \"\", \"PhoneAreaCode\": \"\", \"PhoneCountryCode\": \"\" } ], \"UpdatedDateUTC\": \"2017-08-21T13:49:04.227-07:00\", \"ContactGroups\": [] }, \"Lineitems\": [], \"BankAccount\": { \"Code\": \"088\", \"Name\": \"Business Wells Fargo\", \"AccountID\": \"00000000-0000-0000-0000-000000000000\" }, \"IsReconciled\": false, \"Date\": \"2019-02-25\", \"Reference\": \"You just updated\", \"CurrencyCode\": \"USD\", \"CurrencyRate\": 1, \"Status\": \"AUTHORISED\", \"LineAmountTypes\": \"Inclusive\", \"TotalTax\": 1.74, \"BankTransactionID\": \"00000000-0000-0000-0000-000000000000\", \"UpdatedDateUTC\": \"2019-02-26T12:39:27.813-08:00\" } ] }"
+      "example" : {
+        "BankTransactions" : [ {
+          "Type" : "SPEND",
+          "Contact" : {
+            "ContactID" : "00000000-0000-0000-0000-000000000000",
+            "ContactStatus" : "ACTIVE",
+            "Name" : "Buzz Lightyear",
+            "FirstName" : "Buzz",
+            "LastName" : "Lightyear",
+            "EmailAddress" : "buzz.Lightyear@email.com",
+            "ContactPersons" : [ ],
+            "BankAccountDetails" : "",
+            "Addresses" : [ {
+              "AddressType" : "STREET",
+              "City" : "",
+              "Region" : "",
+              "PostalCode" : "",
+              "Country" : ""
+            }, {
+              "AddressType" : "POBOX",
+              "AddressLine1" : "",
+              "AddressLine2" : "",
+              "AddressLine3" : "",
+              "AddressLine4" : "",
+              "City" : "Palo Alto",
+              "Region" : "CA",
+              "PostalCode" : "94020",
+              "Country" : "United States"
+            } ],
+            "Phones" : [ {
+              "PhoneType" : "DEFAULT",
+              "PhoneNumber" : "847-1294",
+              "PhoneAreaCode" : "(626)",
+              "PhoneCountryCode" : ""
+            }, {
+              "PhoneType" : "DDI",
+              "PhoneNumber" : "",
+              "PhoneAreaCode" : "",
+              "PhoneCountryCode" : ""
+            }, {
+              "PhoneType" : "FAX",
+              "PhoneNumber" : "",
+              "PhoneAreaCode" : "",
+              "PhoneCountryCode" : ""
+            }, {
+              "PhoneType" : "MOBILE",
+              "PhoneNumber" : "",
+              "PhoneAreaCode" : "",
+              "PhoneCountryCode" : ""
+            } ],
+            "UpdatedDateUTC" : "2017-08-21T13:49:04.227-07:00",
+            "ContactGroups" : [ ]
+          },
+          "Lineitems" : [ ],
+          "BankAccount" : {
+            "Code" : "088",
+            "Name" : "Business Wells Fargo",
+            "AccountID" : "00000000-0000-0000-0000-000000000000"
+          },
+          "IsReconciled" : false,
+          "Date" : "2019-02-25",
+          "Reference" : "You just updated",
+          "CurrencyCode" : "USD",
+          "CurrencyRate" : 1,
+          "Status" : "AUTHORISED",
+          "LineAmountTypes" : "Inclusive",
+          "TotalTax" : 1.74,
+          "BankTransactionID" : "00000000-0000-0000-0000-000000000000",
+          "UpdatedDateUTC" : "2019-02-26T12:39:27.813-08:00"
+        } ]
+      }
     }
   },
   "required" : true
@@ -40798,7 +40954,12 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/Contacts"
       },
-      "example" : "{ \"Contacts\": [{ \"ContactID\": \"00000000-0000-0000-0000-000000000000\", \"Name\": \"Thanos\" }]}"
+      "example" : {
+        "Contacts" : [ {
+          "ContactID" : "00000000-0000-0000-0000-000000000000",
+          "Name" : "Thanos"
+        } ]
+      }
     }
   },
   "required" : true
@@ -41192,7 +41353,11 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/ContactGroups"
       },
-      "example" : "{ \"ContactGroups\":[ { \"Name\":\"Suppliers\" } ] }"
+      "example" : {
+        "ContactGroups" : [ {
+          "Name" : "Suppliers"
+        } ]
+      }
     }
   },
   "required" : true
@@ -41397,7 +41562,24 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/CreditNotes"
       },
-      "example" : "{ \"CreditNotes\": [ { \"Type\": \"ACCPAYCREDIT\", \"Contact\": { \"ContactID\": \"430fa14a-f945-44d3-9f97-5df5e28441b8\" }, \"Date\": \"2019-01-05\", \"Status\": \"AUTHORISED\", \"Reference\": \"HelloWorld\", \"SentToContact\": true, \"LineItems\": [ { \"Description\": \"Foobar\", \"Quantity\": 2, \"UnitAmount\": 20, \"AccountCode\": \"400\" } ] } ] }"
+      "example" : {
+        "CreditNotes" : [ {
+          "Type" : "ACCPAYCREDIT",
+          "Contact" : {
+            "ContactID" : "430fa14a-f945-44d3-9f97-5df5e28441b8"
+          },
+          "Date" : "2019-01-05",
+          "Status" : "AUTHORISED",
+          "Reference" : "HelloWorld",
+          "SentToContact" : true,
+          "LineItems" : [ {
+            "Description" : "Foobar",
+            "Quantity" : 2,
+            "UnitAmount" : 20,
+            "AccountCode" : "400"
+          } ]
+        } ]
+      }
     }
   },
   "required" : true
@@ -41829,7 +42011,18 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/ExpenseClaims"
       },
-      "example" : "{ \"ExpenseClaims\": [ { \"Status\": \"SUBMITTED\", \"User\": { \"UserID\": \"d1164823-0ac1-41ad-987b-b4e30fe0b273\" }, \"Receipts\": [ { \"Lineitems\": [], \"ReceiptID\": \"dc1c7f6d-0a4c-402f-acac-551d62ce5816\" } ] } ] }"
+      "example" : {
+        "ExpenseClaims" : [ {
+          "Status" : "SUBMITTED",
+          "User" : {
+            "UserID" : "d1164823-0ac1-41ad-987b-b4e30fe0b273"
+          },
+          "Receipts" : [ {
+            "Lineitems" : [ ],
+            "ReceiptID" : "dc1c7f6d-0a4c-402f-acac-551d62ce5816"
+          } ]
+        } ]
+      }
     }
   },
   "required" : true
@@ -42016,7 +42209,15 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/Invoices"
       },
-      "example" : "{ \"Invoices\": [{ Reference: \"May the force be with you\", \"InvoiceID\": \"00000000-0000-0000-0000-000000000000\", \"LineItems\": [], \"Contact\": {}, \"Type\": \"ACCPAY\" }]}"
+      "example" : {
+        "Invoices" : [ {
+          "Reference" : "May the force be with you",
+          "InvoiceID" : "00000000-0000-0000-0000-000000000000",
+          "LineItems" : [ ],
+          "Contact" : { },
+          "Type" : "ACCPAY"
+        } ]
+      }
     }
   },
   "required" : true
@@ -42438,7 +42639,12 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/Items"
       },
-      "example" : "{ \"Items\": [ { \"Code\": \"ItemCode123\", \"Description\": \"Description 123\" } ] }"
+      "example" : {
+        "Items" : [ {
+          "Code" : "ItemCode123",
+          "Description" : "Description 123"
+        } ]
+      }
     }
   },
   "required" : true
@@ -42652,7 +42858,12 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/LinkedTransactions"
       },
-      "example" : "{ \"LinkedTransactions\": [ { \"SourceTransactionID\": \"00000000-0000-0000-0000-000000000000\", \"SourceLineItemID\": \"00000000-0000-0000-0000-000000000000\" } ] }"
+      "example" : {
+        "LinkedTransactions" : [ {
+          "SourceTransactionID" : "00000000-0000-0000-0000-000000000000",
+          "SourceLineItemID" : "00000000-0000-0000-0000-000000000000"
+        } ]
+      }
     }
   },
   "required" : true
@@ -42854,7 +43065,13 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/ManualJournals"
       },
-      "example" : "{ \"ManualJournals\": [ { \"Narration\": \"Hello Xero\", \"ManualJournalID\": \"00000000-0000-0000-0000-000000000000\", \"JournalLines\": [] } ] }"
+      "example" : {
+        "ManualJournals" : [ {
+          "Narration" : "Hello Xero",
+          "ManualJournalID" : "00000000-0000-0000-0000-000000000000",
+          "JournalLines" : [ ]
+        } ]
+      }
     }
   },
   "required" : true
@@ -43232,7 +43449,23 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/BankTransactions"
       },
-      "example" : "{ \"BankTransactions\": [ { \"Type\": \"SPEND\", \"Contact\": { \"ContactID\": \"00000000-0000-0000-0000-000000000000\" }, \"Lineitems\": [ { \"Description\": \"Foobar\", \"Quantity\": 1, \"UnitAmount\": 20, \"AccountCode\": \"400\" } ], \"BankAccount\": { \"Code\": \"088\" } } ] }"
+      "example" : {
+        "BankTransactions" : [ {
+          "Type" : "SPEND",
+          "Contact" : {
+            "ContactID" : "00000000-0000-0000-0000-000000000000"
+          },
+          "Lineitems" : [ {
+            "Description" : "Foobar",
+            "Quantity" : 1,
+            "UnitAmount" : 20,
+            "AccountCode" : "400"
+          } ],
+          "BankAccount" : {
+            "Code" : "088"
+          }
+        } ]
+      }
     }
   },
   "required" : true
@@ -43440,7 +43673,27 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/Contacts"
       },
-      "example" : "{ \"Contacts\": [ { \"Name\": \"Bruce Banner\", \"EmailAddress\": \"hulk@avengers.com\", \"Phones\": [ { \"PhoneType\": \"MOBILE\", \"PhoneNumber\": \"555-1212\", \"PhoneAreaCode\": \"415\" } ], \"PaymentTerms\": { \"Bills\": { \"Day\": 15, \"Type\": \"OFCURRENTMONTH\" }, \"Sales\": { \"Day\": 10, \"Type\": \"DAYSAFTERBILLMONTH\" } } } ] }"
+      "example" : {
+        "Contacts" : [ {
+          "Name" : "Bruce Banner",
+          "EmailAddress" : "hulk@avengers.com",
+          "Phones" : [ {
+            "PhoneType" : "MOBILE",
+            "PhoneNumber" : "555-1212",
+            "PhoneAreaCode" : "415"
+          } ],
+          "PaymentTerms" : {
+            "Bills" : {
+              "Day" : 15,
+              "Type" : "OFCURRENTMONTH"
+            },
+            "Sales" : {
+              "Day" : 10,
+              "Type" : "DAYSAFTERBILLMONTH"
+            }
+          }
+        } ]
+      }
     }
   },
   "required" : true
@@ -43637,7 +43890,23 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/CreditNotes"
       },
-      "example" : "{ \"CreditNotes\":[ { \"Type\":\"ACCPAYCREDIT\", \"Contact\":{ \"ContactID\":\"430fa14a-f945-44d3-9f97-5df5e28441b8\" }, \"Date\":\"2019-01-05\", \"Status\":\"AUTHORISED\", \"Reference\": \"HelloWorld\", \"LineItems\":[ { \"Description\":\"Foobar\", \"Quantity\":2.0, \"UnitAmount\":20.0, \"AccountCode\":\"400\" } ] } ] }"
+      "example" : {
+        "CreditNotes" : [ {
+          "Type" : "ACCPAYCREDIT",
+          "Contact" : {
+            "ContactID" : "430fa14a-f945-44d3-9f97-5df5e28441b8"
+          },
+          "Date" : "2019-01-05",
+          "Status" : "AUTHORISED",
+          "Reference" : "HelloWorld",
+          "LineItems" : [ {
+            "Description" : "Foobar",
+            "Quantity" : 2.0,
+            "UnitAmount" : 20.0,
+            "AccountCode" : "400"
+          } ]
+        } ]
+      }
     }
   },
   "required" : true
@@ -43683,188 +43952,6 @@ If false return 200 OK and mix of successfully created objects and any with vali
 
                     <div class="inner description marked">
 e.g. unitdp=4 – (Unit Decimal Places) You can opt in to use four decimal places for unit amounts
-                    </div>
-            </div>
-        </div>
-    </div>
-</td>
-</tr>
-
-                  </table>
-                </article>
-              </div>
-              <hr>
-              <div id="api-Accounting-updateOrCreateEmployees">
-                <article id="api-Accounting-updateOrCreateEmployees-0" data-group="User" data-name="updateOrCreateEmployees" data-version="0">
-                  <div class="pull-left">
-                    <h1>updateOrCreateEmployees</h1>
-                    <p>Creates a single new employees used in Xero payrun</p>
-                  </div>
-                  <div class="pull-right"></div>
-                  <div class="clearfix"></div>
-                  <p></p>
-                  <p class="marked"></p>
-                  <p></p>
-                  <br />
-                  <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/Employees</span></code></pre>
-                  <p>
-                  <h3>Usage and SDK Samples</h3>
-                  </p>
-                  <ul class="nav nav-tabs nav-tabs-examples">
-                    <!-- *****REPLACE***** comment out the other languages <li> -->
-                    <li class=""><a href="#examples-Accounting-updateOrCreateEmployees-0-php">PHP</a></li>
-                  </ul>
-                  <div class="tab-content">
-                    <!-- *****REPLACE***** comment out the other languages tab-pane -->
-                    <div class="tab-pane" id="examples-Accounting-updateOrCreateEmployees-0-php">
-                      <pre class="prettyprint"><code class="language-php"><&#63;php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-// Configure OAuth2 access token for authorization: OAuth2
-$config = XeroAPI\XeroPHP\Configuration::getDefaultConfiguration()->setAccessToken( 'YOUR_ACCESS_TOKEN' );       
-
-$apiInstance = new XeroAPI\XeroPHP\Api\AccountingApi(
-    new GuzzleHttp\Client(),
-    $config
-);
-$xeroTenantId = "YOUR_XERO_TENANT_ID";
-$summarizeErrors = true;
-$idempotencyKey = "KEY_VALUE";
-
-$employee = new XeroAPI\XeroPHP\Models\Accounting\Employee;
-$employee->setFirstName('Nick');
-$employee->setLastName('Fury');
-
-$employees = new XeroAPI\XeroPHP\Models\Accounting\Employees;
-$arr_employees = [];
-array_push($arr_employees, $employee);
-$employees->setEmployees($arr_employees);
-
-try {
-  $result = $apiInstance->updateOrCreateEmployees($xeroTenantId, $employees, $summarizeErrors, $idempotencyKey);
-} catch (Exception $e) {
-  echo 'Exception when calling AccountingApi->updateOrCreateEmployees: ', $e->getMessage(), PHP_EOL;
-}
-?>
-</code></pre>
-                    </div>
-                  </div>
-                  <h2>Scopes</h2>
-                  <table>
-                    
-                    <tr>
-                      <td>accounting.settings</td>
-                      <td>Grant read-write access to organisation and account settings</td>
-                    </tr>
-                    
-                  </table>
-                  <h2>Parameters</h2>
-                  <div class="methodsubtabletitle">Header parameters</div>
-                  <table id="methodsubtable">
-                    <tr>
-                      <th width="150px">Name</th>
-                      <th>Description</th>
-                    </tr>
-                    <tr><td style="width:150px;">xero-tenant-id<span style="color:red;">*</span></td>
-<td>
-
-
-    <div id="d2e199_updateOrCreateEmployees_xeroTenantId">
-        <div class="json-schema-view">
-            <div class="primitive">
-                <span class="type">
-                    String
-                </span>
-
-                    <div class="inner description marked">
-Xero identifier for Tenant
-                    </div>
-            </div>
-                <div class="inner required">
-                    Required
-                </div>
-        </div>
-    </div>
-</td>
-</tr>
-
-                    <tr><td style="width:150px;">Idempotency-Key</td>
-<td>
-
-
-    <div id="d2e199_updateOrCreateEmployees_idempotencyKey">
-        <div class="json-schema-view">
-            <div class="primitive">
-                <span class="type">
-                    String
-                </span>
-
-                    <div class="inner description marked">
-This allows you to safely retry requests without the risk of duplicate processing. 128 character max.
-                    </div>
-            </div>
-        </div>
-    </div>
-</td>
-</tr>
-
-                  </table>
-                  <div class="methodsubtabletitle">Body parameters</div>
-                  <table id="methodsubtable">
-                    <tr>
-                      <th width="150px">Name</th>
-                      <th>Description</th>
-                    </tr>
-                    <tr>
-  <td style="width:150px;">employees <span style="color:red;">*</span></td>
-  <td>
-    <div class="json-schema-view">
-      <div class="primitive">
-        <span class="type">
-        Employees
-        </span>
-        <div class="inner description marked">
-          Employees with array of Employee object in body of request
-        </div>
-      </div>
-      <div class="inner required">
-        Required
-      </div>
-    </div>
-    <script type="application/ld+json">
-      {
-  "description" : "Employees with array of Employee object in body of request",
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/Employees"
-      },
-      "example" : "{ \"Employees\": [ { \"FirstName\": \"Nick\", \"LastName\": \"Fury\", \"ExternalLink\": { \"Url\": \"http://twitter.com/#!/search/Nick+Fury\" } } ] }"
-    }
-  },
-  "required" : true
-}
-    </script>
-                  </table>
-                  <div class="methodsubtabletitle">Query parameters</div>
-                  <table id="methodsubtable">
-                    <tr>
-                      <th width="150px">Name</th>
-                      <th>Description</th>
-                    </tr>
-                    <tr><td style="width:150px;">summarizeErrors</td>
-<td>
-
-
-    <div id="d2e199_updateOrCreateEmployees_summarizeErrors">
-        <div class="json-schema-view">
-            <div class="primitive">
-                <span class="type">
-                    Boolean
-                </span>
-
-                    <div class="inner description marked">
-If false return 200 OK and mix of successfully created objects and any with validation errors
                     </div>
             </div>
         </div>
@@ -44039,7 +44126,26 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/Invoices"
       },
-      "example" : "{ \"Invoices\": [ { \"Type\": \"ACCREC\", \"Contact\": { \"ContactID\": \"430fa14a-f945-44d3-9f97-5df5e28441b8\" }, \"LineItems\": [ { \"Description\": \"Acme Tires\", \"Quantity\": 2, \"UnitAmount\": 20, \"AccountCode\": \"200\", \"TaxType\": \"NONE\", \"LineAmount\": 40 } ], \"Date\": \"2019-03-11\", \"DueDate\": \"2018-12-10\", \"Reference\": \"Website Design\", \"Status\": \"AUTHORISED\" } ] }"
+      "example" : {
+        "Invoices" : [ {
+          "Type" : "ACCREC",
+          "Contact" : {
+            "ContactID" : "430fa14a-f945-44d3-9f97-5df5e28441b8"
+          },
+          "LineItems" : [ {
+            "Description" : "Acme Tires",
+            "Quantity" : 2,
+            "UnitAmount" : 20,
+            "AccountCode" : "200",
+            "TaxType" : "NONE",
+            "LineAmount" : 40
+          } ],
+          "Date" : "2019-03-11",
+          "DueDate" : "2018-12-10",
+          "Reference" : "Website Design",
+          "Status" : "AUTHORISED"
+        } ]
+      }
     }
   },
   "required" : true
@@ -44242,7 +44348,13 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/Items"
       },
-      "example" : "{ \"Items\": [ { \"Code\": \"ItemCode123\", \"Name\": \"ItemName XYZ\", \"Description\": \"Item Description ABC\" } ] }"
+      "example" : {
+        "Items" : [ {
+          "Code" : "ItemCode123",
+          "Name" : "ItemName XYZ",
+          "Description" : "Item Description ABC"
+        } ]
+      }
     }
   },
   "required" : true
@@ -44459,7 +44571,25 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/ManualJournals"
       },
-      "example" : "{ \"ManualJournals\": [ { \"Narration\": \"Journal Desc\", \"JournalLines\": [ { \"LineAmount\": 100, \"AccountCode\": \"400\", \"Description\": \"Money Movement\" }, { \"LineAmount\": -100, \"AccountCode\": \"400\", \"Description\": \"Prepayment of things\", \"Tracking\": [ { \"Name\": \"North\", \"Option\": \"Region\" } ] } ], \"Date\": \"2019-03-14\" } ] }"
+      "example" : {
+        "ManualJournals" : [ {
+          "Narration" : "Journal Desc",
+          "JournalLines" : [ {
+            "LineAmount" : 100,
+            "AccountCode" : "400",
+            "Description" : "Money Movement"
+          }, {
+            "LineAmount" : -100,
+            "AccountCode" : "400",
+            "Description" : "Prepayment of things",
+            "Tracking" : [ {
+              "Name" : "North",
+              "Option" : "Region"
+            } ]
+          } ],
+          "Date" : "2019-03-14"
+        } ]
+      }
     }
   },
   "required" : true
@@ -44653,7 +44783,20 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/PurchaseOrders"
       },
-      "example" : "{ \"PurchaseOrders\": [ { \"Contact\": { \"ContactID\": \"00000000-0000-0000-0000-000000000000\" }, \"LineItems\": [ { \"Description\": \"Foobar\", \"Quantity\": 1, \"UnitAmount\": 20, \"AccountCode\": \"710\" } ], \"Date\": \"2019-03-13\" } ] }"
+      "example" : {
+        "PurchaseOrders" : [ {
+          "Contact" : {
+            "ContactID" : "00000000-0000-0000-0000-000000000000"
+          },
+          "LineItems" : [ {
+            "Description" : "Foobar",
+            "Quantity" : 1,
+            "UnitAmount" : 20,
+            "AccountCode" : "710"
+          } ],
+          "Date" : "2019-03-13"
+        } ]
+      }
     }
   },
   "required" : true
@@ -44847,7 +44990,20 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/Quotes"
       },
-      "example" : "{ \"Quotes\": [ { \"Contact\": { \"ContactID\": \"00000000-0000-0000-0000-000000000000\" }, \"LineItems\": [ { \"Description\": \"Foobar\", \"Quantity\": 1, \"UnitAmount\": 20, \"AccountCode\": \"12775\" } ], \"Date\": \"2020-02-01\" } ] }"
+      "example" : {
+        "Quotes" : [ {
+          "Contact" : {
+            "ContactID" : "00000000-0000-0000-0000-000000000000"
+          },
+          "LineItems" : [ {
+            "Description" : "Foobar",
+            "Quantity" : 1,
+            "UnitAmount" : 20,
+            "AccountCode" : "12775"
+          } ],
+          "Date" : "2020-02-01"
+        } ]
+      }
     }
   },
   "required" : true
@@ -45020,7 +45176,42 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/RepeatingInvoices"
       },
-      "example" : "{ \"RepeatingInvoices\": [ { \"Schedule\": { \"Period\": 1, \"Unit\": \"MONTHLY\", \"DueDate\": 10, \"DueDateType\": \"OFFOLLOWINGMONTH\", \"StartDate\": \"\\/Date(1555286400000+0000)\\/\" }, \"Type\": \"ACCREC\", \"Reference\": \"[Week]\", \"ApprovedForSending\": false, \"SendCopy\": false, \"MarkAsSent\": false, \"IncludePDF\": false, \"Contact\": { \"ContactID\": \"430fa14a-f945-44d3-9f97-5df5e28441b8\", \"Name\": \"Liam Gallagher\" }, \"Status\": \"AUTHORISED\", \"LineAmountTypes\": \"Exclusive\", \"LineItems\": [ { \"Description\": \"Guitars Fender Strat\", \"UnitAmount\": 5000.00, \"TaxType\": \"OUTPUT2\", \"TaxAmount\": 750.00, \"LineAmount\": 5000.00, \"AccountCode\": \"200\", \"Tracking\": [], \"Quantity\": 1.0000, \"LineItemID\": \"13a8353c-d2af-4d5b-920c-438449f08900\", \"DiscountEnteredAsPercent\": true } ], \"CurrencyCode\": \"NZD\" } ] }"
+      "example" : {
+        "RepeatingInvoices" : [ {
+          "Schedule" : {
+            "Period" : 1,
+            "Unit" : "MONTHLY",
+            "DueDate" : 10,
+            "DueDateType" : "OFFOLLOWINGMONTH",
+            "StartDate" : "/Date(1555286400000+0000)/"
+          },
+          "Type" : "ACCREC",
+          "Reference" : "[Week]",
+          "ApprovedForSending" : false,
+          "SendCopy" : false,
+          "MarkAsSent" : false,
+          "IncludePDF" : false,
+          "Contact" : {
+            "ContactID" : "430fa14a-f945-44d3-9f97-5df5e28441b8",
+            "Name" : "Liam Gallagher"
+          },
+          "Status" : "AUTHORISED",
+          "LineAmountTypes" : "Exclusive",
+          "LineItems" : [ {
+            "Description" : "Guitars Fender Strat",
+            "UnitAmount" : 5000.0,
+            "TaxType" : "OUTPUT2",
+            "TaxAmount" : 750.0,
+            "LineAmount" : 5000.0,
+            "AccountCode" : "200",
+            "Tracking" : [ ],
+            "Quantity" : 1.0,
+            "LineItemID" : "13a8353c-d2af-4d5b-920c-438449f08900",
+            "DiscountEnteredAsPercent" : true
+          } ],
+          "CurrencyCode" : "NZD"
+        } ]
+      }
     }
   },
   "required" : true
@@ -45233,7 +45424,13 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/PurchaseOrders"
       },
-      "example" : "{ \"PurchaseOrders\": [ { \"AttentionTo\": \"Peter Parker\", \"LineItems\": [], \"Contact\": {} } ] }"
+      "example" : {
+        "PurchaseOrders" : [ {
+          "AttentionTo" : "Peter Parker",
+          "LineItems" : [ ],
+          "Contact" : { }
+        } ]
+      }
     }
   },
   "required" : true
@@ -45632,7 +45829,15 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/Quotes"
       },
-      "example" : "{ \"Quotes\": [ { \"Reference\": \"I am an update\", \"Contact\": { \"ContactID\": \"00000000-0000-0000-0000-000000000000\" }, \"Date\": \"2020-02-01\" } ] }"
+      "example" : {
+        "Quotes" : [ {
+          "Reference" : "I am an update",
+          "Contact" : {
+            "ContactID" : "00000000-0000-0000-0000-000000000000"
+          },
+          "Date" : "2020-02-01"
+        } ]
+      }
     }
   },
   "required" : true
@@ -46032,7 +46237,15 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/Receipts"
       },
-      "example" : "{ \"Receipts\": [ { \"Lineitems\": [], \"User\": { \"UserID\": \"00000000-0000-0000-0000-000000000000\" }, \"Reference\": \"Foobar\" } ] }"
+      "example" : {
+        "Receipts" : [ {
+          "Lineitems" : [ ],
+          "User" : {
+            "UserID" : "00000000-0000-0000-0000-000000000000"
+          },
+          "Reference" : "Foobar"
+        } ]
+      }
     }
   },
   "required" : true
@@ -46444,7 +46657,53 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/RepeatingInvoices"
       },
-      "example" : "{ \"Schedule\": { \"Period\": 1, \"Unit\": \"MONTHLY\", \"DueDate\": 10, \"DueDateType\": \"OFFOLLOWINGMONTH\", \"StartDate\": \"\\/Date(1555286400000+0000)\\/\", \"EndDate\": \"\\/Date(1569801600000+0000)\\/\", \"NextScheduledDate\": \"\\/Date(1555286400000+0000)\\/\" }, \"RepeatingInvoiceID\": \"428c0d75-909f-4b04-8403-a48dc27283b0\", \"Type\": \"ACCREC\", \"Reference\": \"[Week]\", \"HasAttachments\": true, \"ApprovedForSending\": false, \"SendCopy\": false, \"MarkAsSent\": false, \"IncludePDF\": false, \"ID\": \"428c0d75-909f-4b04-8403-a48dc27283b0\", \"Contact\": { \"ContactID\": \"430fa14a-f945-44d3-9f97-5df5e28441b8\", \"Name\": \"Liam Gallagher\", \"Addresses\": [], \"Phones\": [], \"ContactGroups\": [], \"ContactPersons\": [], \"HasValidationErrors\": false }, \"Status\": \"DELETED\", \"LineAmountTypes\": \"Exclusive\", \"LineItems\": [ { \"Description\": \"Guitars Fender Strat\", \"UnitAmount\": 5000.00, \"TaxType\": \"OUTPUT2\", \"TaxAmount\": 750.00, \"LineAmount\": 5000.00, \"AccountCode\": \"200\", \"Tracking\": [], \"Quantity\": 1.0000, \"LineItemID\": \"13a8353c-d2af-4d5b-920c-438449f08900\", \"DiscountEnteredAsPercent\": true } ], \"SubTotal\": 5000.00, \"TotalTax\": 750.00, \"Total\": 5750.00, \"CurrencyCode\": \"NZD\" }"
+      "example" : {
+        "Schedule" : {
+          "Period" : 1,
+          "Unit" : "MONTHLY",
+          "DueDate" : 10,
+          "DueDateType" : "OFFOLLOWINGMONTH",
+          "StartDate" : "/Date(1555286400000+0000)/",
+          "EndDate" : "/Date(1569801600000+0000)/",
+          "NextScheduledDate" : "/Date(1555286400000+0000)/"
+        },
+        "RepeatingInvoiceID" : "428c0d75-909f-4b04-8403-a48dc27283b0",
+        "Type" : "ACCREC",
+        "Reference" : "[Week]",
+        "HasAttachments" : true,
+        "ApprovedForSending" : false,
+        "SendCopy" : false,
+        "MarkAsSent" : false,
+        "IncludePDF" : false,
+        "ID" : "428c0d75-909f-4b04-8403-a48dc27283b0",
+        "Contact" : {
+          "ContactID" : "430fa14a-f945-44d3-9f97-5df5e28441b8",
+          "Name" : "Liam Gallagher",
+          "Addresses" : [ ],
+          "Phones" : [ ],
+          "ContactGroups" : [ ],
+          "ContactPersons" : [ ],
+          "HasValidationErrors" : false
+        },
+        "Status" : "DELETED",
+        "LineAmountTypes" : "Exclusive",
+        "LineItems" : [ {
+          "Description" : "Guitars Fender Strat",
+          "UnitAmount" : 5000.0,
+          "TaxType" : "OUTPUT2",
+          "TaxAmount" : 750.0,
+          "LineAmount" : 5000.0,
+          "AccountCode" : "200",
+          "Tracking" : [ ],
+          "Quantity" : 1.0,
+          "LineItemID" : "13a8353c-d2af-4d5b-920c-438449f08900",
+          "DiscountEnteredAsPercent" : true
+        } ],
+        "SubTotal" : 5000.0,
+        "TotalTax" : 750.0,
+        "Total" : 5750.0,
+        "CurrencyCode" : "NZD"
+      }
     }
   },
   "required" : true
@@ -46810,7 +47069,17 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/TaxRates"
       },
-      "example" : "{ \"TaxRates\": [ { \"Name\": \"State Tax NY\", \"TaxComponents\": [ { \"Name\": \"State Tax\", \"Rate\": 2.25 } ], \"Status\": \"DELETED\", \"ReportTaxType\": \"INPUT\" } ] }"
+      "example" : {
+        "TaxRates" : [ {
+          "Name" : "State Tax NY",
+          "TaxComponents" : [ {
+            "Name" : "State Tax",
+            "Rate" : 2.25
+          } ],
+          "Status" : "DELETED",
+          "ReportTaxType" : "INPUT"
+        } ]
+      }
     }
   },
   "required" : true
@@ -46991,7 +47260,9 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/TrackingCategory"
       },
-      "example" : "{ \"Name\": \"Avengers\" }"
+      "example" : {
+        "Name" : "Avengers"
+      }
     }
   },
   "required" : true
@@ -47199,7 +47470,9 @@ This allows you to safely retry requests without the risk of duplicate processin
       "schema" : {
         "$ref" : "#/components/schemas/TrackingOption"
       },
-      "example" : "{ name: \"Vision\" }"
+      "example" : {
+        "name" : "Vision"
+      }
     }
   },
   "required" : true

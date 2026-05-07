@@ -213,6 +213,15 @@ class Employment implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
+        if ($this->container['payroll_calendar_id'] === null) {
+            $invalidProperties[] = "'payroll_calendar_id' can't be null";
+        }
+        if ($this->container['start_date'] === null) {
+            $invalidProperties[] = "'start_date' can't be null";
+        }
+        if ($this->container['engagement_type'] === null) {
+            $invalidProperties[] = "'engagement_type' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -231,7 +240,7 @@ class Employment implements ModelInterface, ArrayAccess
     /**
      * Gets payroll_calendar_id
      *
-     * @return string|null
+     * @return string
      */
     public function getPayrollCalendarId()
     {
@@ -241,7 +250,7 @@ class Employment implements ModelInterface, ArrayAccess
     /**
      * Sets payroll_calendar_id
      *
-     * @param string|null $payroll_calendar_id Xero unique identifier for the payroll calendar of the employee
+     * @param string $payroll_calendar_id Xero unique identifier for the payroll calendar of the employee
      *
      * @return $this
      */
@@ -285,7 +294,7 @@ class Employment implements ModelInterface, ArrayAccess
     /**
      * Gets start_date
      *
-     * @return \DateTime|null
+     * @return \DateTime
      */
     public function getStartDate()
     {
@@ -295,7 +304,7 @@ class Employment implements ModelInterface, ArrayAccess
     /**
      * Sets start_date
      *
-     * @param \DateTime|null $start_date Start date of the employment (YYYY-MM-DD)
+     * @param \DateTime $start_date Start date of the employment (YYYY-MM-DD)
      *
      * @return $this
      */
@@ -312,7 +321,7 @@ class Employment implements ModelInterface, ArrayAccess
     /**
      * Gets engagement_type
      *
-     * @return string|null
+     * @return string
      */
     public function getEngagementType()
     {
@@ -322,7 +331,7 @@ class Employment implements ModelInterface, ArrayAccess
     /**
      * Sets engagement_type
      *
-     * @param string|null $engagement_type Engagement type of the employee
+     * @param string $engagement_type Engagement type of the employee
      *
      * @return $this
      */

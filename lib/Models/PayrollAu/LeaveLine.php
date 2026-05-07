@@ -62,6 +62,7 @@ class LeaveLine implements ModelInterface, ArrayAccess
         'entitlement_final_pay_payout_type' => '\XeroAPI\XeroPHP\Models\PayrollAu\EntitlementFinalPayPayoutType',
         'employment_termination_payment_type' => '\XeroAPI\XeroPHP\Models\PayrollAu\EmploymentTerminationPaymentType',
         'include_superannuation_guarantee_contribution' => 'bool',
+        'is_qualifying_earnings' => 'bool',
         'number_of_units' => 'double',
         'annual_number_of_units' => 'double',
         'full_time_number_of_units_per_period' => 'double'
@@ -78,6 +79,7 @@ class LeaveLine implements ModelInterface, ArrayAccess
         'entitlement_final_pay_payout_type' => null,
         'employment_termination_payment_type' => null,
         'include_superannuation_guarantee_contribution' => null,
+        'is_qualifying_earnings' => null,
         'number_of_units' => 'double',
         'annual_number_of_units' => 'double',
         'full_time_number_of_units_per_period' => 'double'
@@ -115,6 +117,7 @@ class LeaveLine implements ModelInterface, ArrayAccess
         'entitlement_final_pay_payout_type' => 'EntitlementFinalPayPayoutType',
         'employment_termination_payment_type' => 'EmploymentTerminationPaymentType',
         'include_superannuation_guarantee_contribution' => 'IncludeSuperannuationGuaranteeContribution',
+        'is_qualifying_earnings' => 'IsQualifyingEarnings',
         'number_of_units' => 'NumberOfUnits',
         'annual_number_of_units' => 'AnnualNumberOfUnits',
         'full_time_number_of_units_per_period' => 'FullTimeNumberOfUnitsPerPeriod'
@@ -131,6 +134,7 @@ class LeaveLine implements ModelInterface, ArrayAccess
         'entitlement_final_pay_payout_type' => 'setEntitlementFinalPayPayoutType',
         'employment_termination_payment_type' => 'setEmploymentTerminationPaymentType',
         'include_superannuation_guarantee_contribution' => 'setIncludeSuperannuationGuaranteeContribution',
+        'is_qualifying_earnings' => 'setIsQualifyingEarnings',
         'number_of_units' => 'setNumberOfUnits',
         'annual_number_of_units' => 'setAnnualNumberOfUnits',
         'full_time_number_of_units_per_period' => 'setFullTimeNumberOfUnitsPerPeriod'
@@ -147,6 +151,7 @@ class LeaveLine implements ModelInterface, ArrayAccess
         'entitlement_final_pay_payout_type' => 'getEntitlementFinalPayPayoutType',
         'employment_termination_payment_type' => 'getEmploymentTerminationPaymentType',
         'include_superannuation_guarantee_contribution' => 'getIncludeSuperannuationGuaranteeContribution',
+        'is_qualifying_earnings' => 'getIsQualifyingEarnings',
         'number_of_units' => 'getNumberOfUnits',
         'annual_number_of_units' => 'getAnnualNumberOfUnits',
         'full_time_number_of_units_per_period' => 'getFullTimeNumberOfUnitsPerPeriod'
@@ -217,6 +222,7 @@ class LeaveLine implements ModelInterface, ArrayAccess
         $this->container['entitlement_final_pay_payout_type'] = isset($data['entitlement_final_pay_payout_type']) ? $data['entitlement_final_pay_payout_type'] : null;
         $this->container['employment_termination_payment_type'] = isset($data['employment_termination_payment_type']) ? $data['employment_termination_payment_type'] : null;
         $this->container['include_superannuation_guarantee_contribution'] = isset($data['include_superannuation_guarantee_contribution']) ? $data['include_superannuation_guarantee_contribution'] : null;
+        $this->container['is_qualifying_earnings'] = isset($data['is_qualifying_earnings']) ? $data['is_qualifying_earnings'] : null;
         $this->container['number_of_units'] = isset($data['number_of_units']) ? $data['number_of_units'] : null;
         $this->container['annual_number_of_units'] = isset($data['annual_number_of_units']) ? $data['annual_number_of_units'] : null;
         $this->container['full_time_number_of_units_per_period'] = isset($data['full_time_number_of_units_per_period']) ? $data['full_time_number_of_units_per_period'] : null;
@@ -375,6 +381,33 @@ class LeaveLine implements ModelInterface, ArrayAccess
     {
 
         $this->container['include_superannuation_guarantee_contribution'] = $include_superannuation_guarantee_contribution;
+
+        return $this;
+    }
+
+
+
+    /**
+     * Gets is_qualifying_earnings
+     *
+     * @return bool|null
+     */
+    public function getIsQualifyingEarnings()
+    {
+        return $this->container['is_qualifying_earnings'];
+    }
+
+    /**
+     * Sets is_qualifying_earnings
+     *
+     * @param bool|null $is_qualifying_earnings Optional Boolean to determine if the earnings rate is considered as qualifying earnings for superannuation guarantee calculations. When not specified value is calculated based on superannuation settings
+     *
+     * @return $this
+     */
+    public function setIsQualifyingEarnings($is_qualifying_earnings)
+    {
+
+        $this->container['is_qualifying_earnings'] = $is_qualifying_earnings;
 
         return $this;
     }

@@ -181,6 +181,7 @@ class Product implements ModelInterface, ArrayAccess
     const TYPE_FIXED = 'FIXED';
     const TYPE_PER_SEAT = 'PER_SEAT';
     const TYPE_METERED = 'METERED';
+    const TYPE_SIMPLE = 'SIMPLE';
     
 
     
@@ -195,6 +196,7 @@ class Product implements ModelInterface, ArrayAccess
             self::TYPE_FIXED,
             self::TYPE_PER_SEAT,
             self::TYPE_METERED,
+            self::TYPE_SIMPLE,
         ];
     }
     
@@ -347,7 +349,7 @@ class Product implements ModelInterface, ArrayAccess
     /**
      * Sets type
      *
-     * @param string|null $type The pricing model of the product: * FIXED: Customers are charged a fixed amount for each billing period * PER_SEAT: Customers are charged based on the number of units they purchase * METERED: Customers are charged per use of this product
+     * @param string|null $type The pricing model of the product: * FIXED: Customers are charged a fixed amount for each billing period * PER_SEAT: Customers are charged based on the number of units they purchase * METERED: Customers are charged per use of this product * SIMPLE: Customers are charged on a fixed amount for each billing period with an optional add-on feature
      *
      * @return $this
      */

@@ -75,6 +75,7 @@ class Overpayment implements ModelInterface, ArrayAccess
         'applied_amount' => 'double',
         'payments' => '\XeroAPI\XeroPHP\Models\Accounting\Payment[]',
         'has_attachments' => 'bool',
+        'reference' => 'string',
         'attachments' => '\XeroAPI\XeroPHP\Models\Accounting\Attachment[]'
     ];
 
@@ -102,6 +103,7 @@ class Overpayment implements ModelInterface, ArrayAccess
         'applied_amount' => 'double',
         'payments' => null,
         'has_attachments' => null,
+        'reference' => null,
         'attachments' => null
     ];
 
@@ -150,6 +152,7 @@ class Overpayment implements ModelInterface, ArrayAccess
         'applied_amount' => 'AppliedAmount',
         'payments' => 'Payments',
         'has_attachments' => 'HasAttachments',
+        'reference' => 'Reference',
         'attachments' => 'Attachments'
     ];
 
@@ -177,6 +180,7 @@ class Overpayment implements ModelInterface, ArrayAccess
         'applied_amount' => 'setAppliedAmount',
         'payments' => 'setPayments',
         'has_attachments' => 'setHasAttachments',
+        'reference' => 'setReference',
         'attachments' => 'setAttachments'
     ];
 
@@ -204,6 +208,7 @@ class Overpayment implements ModelInterface, ArrayAccess
         'applied_amount' => 'getAppliedAmount',
         'payments' => 'getPayments',
         'has_attachments' => 'getHasAttachments',
+        'reference' => 'getReference',
         'attachments' => 'getAttachments'
     ];
 
@@ -319,6 +324,7 @@ class Overpayment implements ModelInterface, ArrayAccess
         $this->container['applied_amount'] = isset($data['applied_amount']) ? $data['applied_amount'] : null;
         $this->container['payments'] = isset($data['payments']) ? $data['payments'] : null;
         $this->container['has_attachments'] = isset($data['has_attachments']) ? $data['has_attachments'] : false;
+        $this->container['reference'] = isset($data['reference']) ? $data['reference'] : null;
         $this->container['attachments'] = isset($data['attachments']) ? $data['attachments'] : null;
     }
 
@@ -896,6 +902,33 @@ class Overpayment implements ModelInterface, ArrayAccess
 
         return $this;
     }
+
+
+    /**
+     * Gets reference
+     *
+     * @return string|null
+     */
+    public function getReference()
+    {
+        return $this->container['reference'];
+    }
+
+    /**
+     * Sets reference
+     *
+     * @param string|null $reference An optional description for Overpayment
+     *
+     * @return $this
+     */
+    public function setReference($reference)
+    {
+
+        $this->container['reference'] = $reference;
+
+        return $this;
+    }
+
 
 
     /**
